@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
 const authRoute = require('./Routes/auth');
+const userInfo = require('./Routes/userInfo')
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -22,6 +23,7 @@ then(()=>{
 app.use(express.json());
 
 app.use('/api/auth', authRoute);
+app.use('/api/',userInfo);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
