@@ -19,6 +19,16 @@ const UserSchema = new mongoose.Schema({
         require:true,
         min:6
     },
+    firstName:{
+        type:String,
+        min:2,
+        max:40
+    },
+    lastName:{
+        type:String,
+        min:2,
+        max:40
+    },
     profilePicture:{
         type:String,
         default:" "
