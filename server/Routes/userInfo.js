@@ -5,7 +5,7 @@ const User = require("../Models/User");
 //updating user about section
 router.post('/update', async(req,res)=>{
     try{
-        const myQuery = { username : "himanshusah41"}
+        const myQuery = { username : "himanshusah41"} // logged in profile
         const userInfo = {$set :{
             about:req.body.about,
             location:req.body.location,

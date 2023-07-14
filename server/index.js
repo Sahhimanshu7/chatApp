@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 
 const fs = require('fs');
+const userFriends = require('./Routes/userFriends')
 dotenv.config();
 
 //Mongoose connection establishment and check
@@ -24,6 +25,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoute);
 app.use('/api/',userInfo);
+app.use('/api/',userFriends);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
