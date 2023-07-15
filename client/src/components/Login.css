@@ -1,0 +1,48 @@
+.login-window{
+    margin-left: 10%;
+
+    background: #7B7373;
+    width: 20%;
+    height: 350px;
+
+    border-radius: 20px;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input{
+    border: 1px solid white;
+    outline: none;
+    border-radius: 20px;
+    padding: 12px;
+    margin: 15px;
+}
+.login-head{
+    color:#060c78 ;
+    margin: 15px;
+}
+.login-button{
+    background-color: #7C80EC;
+    color: white;
+    border: none;
+    padding: 12px 25px 12px 25px;
+    border-radius: 20px;
+    margin: 10px;
+}
+.create-new-account{
+    margin: 10px;
+    padding: 12px 25px 12px 25px;
+    border: none;
+    border-radius: 20px;
+}
+
