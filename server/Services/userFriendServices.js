@@ -18,10 +18,12 @@ const deleteFriendRequest = async(req,res) =>{
     const senderID = req.params.senderID;
     const receiverID = req.params.receiverID;
     try {
-        await User.findByIdAndUpdate(senderID,{$push:{friendRequestReceived:receiverID}});
-        await User.findByIdAndUpdate(receiverID,{$push:{friendRequestSend:senderID}});
+        await User.findByIdAndUpdate(senderID,{$push:{friendRequestSend:receiverID}});
+        await User.findByIdAndUpdate(receiverID,{$push:{friendRequestReceived:senderID}});
     } catch (error) {
         res.status(500).json(error);
     }
 }
 
+module.exports = {sendFriendsRequest,
+                deleteFriendRequest}
