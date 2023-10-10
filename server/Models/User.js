@@ -31,16 +31,16 @@ const UserSchema = new mongoose.Schema({
     },
     profilePicture:{
         type:String,
-        default:" "
+        default: null
     },
     backgroundPicture:{
         type:String,
-        default:" "
+        default: null
     },
     about:{
         type:String,
         max:160,
-        default:" "
+        default: null
     },
     location:{
         type:String,
@@ -49,17 +49,29 @@ const UserSchema = new mongoose.Schema({
     },
     organization:{
         type:String,
-        default:" "
+        default:null
     },
     position:{
         type:String,
         max:40,
-        default:" "
+        default:null
     },
     hobbies:{
         type:Array,
         default:[],
         max:9
+    },
+    friends:{
+        type:Array,
+        default:[]
+    },
+    friendRequestReceived:{
+        type:Array,
+        default:[]
+    },
+    friendRequestSend:{
+        type:Array,
+        default:[]
     }
 },
 {timestamps:true});

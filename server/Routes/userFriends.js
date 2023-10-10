@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const UserFriends = require('../Models/UserFriends');
+
 
 //send friend request
 router.post('/sendFriendRequest', async(req,res)=>{
