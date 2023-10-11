@@ -31,7 +31,7 @@ const UserSchema = new mongoose.Schema({
     },
     profilePicture:{
         type:String,
-        default: null
+        default: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
     },
     backgroundPicture:{
         type:String,

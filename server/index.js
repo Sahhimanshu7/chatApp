@@ -1,15 +1,24 @@
-const cors = require("cors");
+// 
+
+//        copyright @ Himanshu Sah 2023
+
+//            server starts here
+
+
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
+
 const authRoute = require('./Routes/auth');
-const userInfo = require('./Routes/userInfo')
+const userInfo = require('./Routes/userInfo');
+const chatRoutes = require('./Routes/chatRoutes');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
 
+
 const fs = require('fs');
-const userFriends = require('./Routes/userFriends')
+
 dotenv.config();
 
 //Mongoose connection establishment and check
@@ -23,14 +32,15 @@ then(()=>{
 //middleware
 app.use(express.json());
 
-app.use('/api/auth', authRoute);
-app.use('/api/',userInfo);
-app.use('/api/',userFriends);
+// Authentication route
+app.use('/api/auth/', authRoute);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// updating user info             -- Incomplete
+app.use('/api/userinfo',userInfo);
+
+app.use('/api/chatapp/', chatRoutes);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
+

@@ -1,0 +1,42 @@
+.logo{
+        color: #7C80EC;
+        font-family: Inter;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal; 
+    
+        padding: 20px;
+}
+.chat-page{
+    height:100vh;
+    width: 100vw;
+    background: #343131;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.profile-img{
+    padding: 20px;
+}
+.body{
+    display: flex;
+    justify-content: space-between;
+}
+.left-side{
+    width:25vw;
+    height: 80vh;
+    margin: 20px;
+    border-radius: 20px;
+    background: #7B7373;
+}
+.right-side{
+    width:70vw;
+    height:80vh;
+    border-radius: 20px;
+    background: #7B7373;
+    margin: 20px;
+}
