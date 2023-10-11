@@ -24,7 +24,7 @@ const userServices = require('../Services/userServices');
 // });
 
 // searching users
-router.get('/get-user/', function(req,res){
+router.get('/get-user/:search', function(req,res){
     userServices.getUser(req,res);
 })
 

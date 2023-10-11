@@ -1,3 +1,4 @@
+import Search from '../components/Search';
 import './ChatPage.css';
 
 function ChatPage(){
@@ -10,7 +11,7 @@ function ChatPage(){
             </div>
             <div className = "body">
                 <div className = "left-side">
-
+                    <Search/>
                 </div>
                 <div className = "right-side">
                    

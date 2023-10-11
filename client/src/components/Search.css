@@ -1,0 +1,53 @@
+.search-box input{
+    border-radius: 20px;
+    background: #343131;
+    border: none;
+
+    width: 90%;
+    height: 50px;
+
+    color: aliceblue;
+    font-size: larger;
+}
+.cards{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    
+    max-height: 60vh;
+    overflow-x: scroll;
+
+    width: 90%;
+    margin:10px;
+
+    color:aliceblue
+}
+
+.i-card{
+    margin: 8px;
+    border-radius: 20px;
+    background-color: #343131;
+    padding: 8px;
+    width: 100%;
+
+    display: flexs;
+}
+.i-card img{
+    width: 40px;
+    width: 40px;
+    border-radius:50% ;
+
+    margin: 10px;
+}
+
+.c-card{
+    display: flex;
+}
+.i-card h1{
+    font-size: 24px;
+}
+.i-card p{
+    font-size: 12px;
+    margin: 10px;
+}

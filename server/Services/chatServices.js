@@ -12,7 +12,7 @@ const getChat = async(req,res) =>{
             {users: {$elemMatch: {$eq: friendID}}}
         ],
     }).populate("users", "-password")
-    .populate("latestMessage");
+    .populate("latestMessage"); 
     
     isChat = await User.populate(isChat, {
         path:"latestMessage.sender",
@@ -56,5 +56,6 @@ const fetchChat = async(req,res) =>{
         res.status(500).json(error.message);
     }
 }
+
 
 module.exports = {getChat, fetchChat}

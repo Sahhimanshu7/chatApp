@@ -36,7 +36,7 @@ app.use(express.json());
 app.use('/api/auth/', authRoute);
 
 // updating user info             -- Incomplete
-app.use('/api/userinfo',userInfo);
+app.use('/api/userinfo/',userInfo);
 
 app.use('/api/chatapp/', chatRoutes);
 
