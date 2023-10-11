@@ -36,4 +36,25 @@ const getChat = async(req,res) =>{
     }
 }
 
-module.exports = {getChat}
+// fetching chat for users
+const fetchChat = async(req,res) =>{
+    const userID = req.body.id;
+    try {
+        await ChatModel.find({users: {$elemMatch: {$eq:userID}}})
+        .populate("users", "-password")
+        .populate("GroupAdmin","-password")
+        .populate("latestMessage")
+        .sort({updatedAt : -1})
+        .then(async(results) =>{
+            results = await User.populate(results,{
+                path:"latestMessage.sender",
+                select:"username email firstName lastName"
+            });
+            res.status(200).send(results);
+        });
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+}
+
+module.exports = {getChat, fetchChat}

@@ -8,4 +8,8 @@ router.post(`/getchat/`,function(req,res){
     chatServices.getChat(req,res);
 });
 
+router.get('/fetchchat/', function(req,res){
+    chatServices.fetchChat(req,res);
+})
+
 module.exports = router;
