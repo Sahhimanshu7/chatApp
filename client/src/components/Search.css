@@ -1,13 +1,15 @@
 .search-box input{
     border-radius: 20px;
-    background: #343131;
+    background: #7B7373;
     border: none;
 
-    width: 90%;
+    width: 50vw;
     height: 50px;
 
     color: aliceblue;
     font-size: larger;
+    margin-top:30px ;
+    margin-right: 90px; 
 }
 .cards{
     display: flex;
@@ -16,12 +18,15 @@
     flex-direction: column;
     
     max-height: 60vh;
-    overflow-x: scroll;
+    overflow-x:inherit;
 
     width: 90%;
     margin:10px;
 
-    color:aliceblue
+    
+    position: absolute;
+    top: 10%;
+    left: 10%;
 }
 
 .i-card{
@@ -29,9 +34,8 @@
     border-radius: 20px;
     background-color: #343131;
     padding: 8px;
-    width: 100%;
-
-    display: flexs;
+    width: 35%;
+    display: flex;
 }
 .i-card img{
     width: 40px;
@@ -43,6 +47,9 @@
 
 .c-card{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 120%;
 }
 .i-card h1{
     font-size: 24px;
@@ -50,4 +57,21 @@
 .i-card p{
     font-size: 12px;
     margin: 10px;
+}
+
+.big-button{
+    color:aliceblue;
+    width: 60%;
+    background-color: #343131;
+    outline: none;
+    border: none;
+}
+.add-friend{
+    background-color: #7C80EC;
+    padding: 10px;
+    border-radius: 20px;
+    margin-right: 0px;
+    border: none;
+    outline: none;
+    
 }

@@ -18,11 +18,16 @@ const Search = () =>{
         }
         
     }, [searchInput]);
-    console.log(APIData);
+    const handleAddFriendClick = (e) =>{
+        console.log(e);
+    };
+    const handleUserClick = (e) =>{
+        console.log(e);
+    } 
     return(
         <div className = "search-box-friends">
             <div className="search-box">
-                <input type="text" name="keyword" placeholder="Search chat"
+                <input type="text" name="keyword" placeholder="Search Accounts ... "
                 onChange={(e) => {
                     setSearchInput(e.target.value);
                     if(e.target.value !== ''){
@@ -39,18 +44,28 @@ const Search = () =>{
             <div className='show-friends-cards'>
             <Card.Group itemsPerRow={3} className='cards'>
                 {searchInput.length > 1 ? (
-                    filteredResults.map((item) => {
+                    filteredResults.map((item,index=1) => {
+                        index = index + 1;
                         return (
+                            
                             <Card className='i-card'>
+                               
                                 <Card.Content className='c-card'>
+                                    
                                     <img src={item.profilePicture} alt='pp' />
                                     
                                     <Card.Description>
-                                    <h1>{item.username}</h1>
+                                    <button key={index} onClick={()=>handleUserClick(item._id)} className='big-button'>
+                                      <h1>{item.username}</h1>
                                       <p>  {item.email}</p>
+                                      </button>
                                     </Card.Description>
+                                    
+                                    <button key = {index} onClick={()=>handleAddFriendClick(item._id)} className='add-friend'>Add Friend</button>
                                 </Card.Content>
+                                
                             </Card>
+                            
                         )
                     })
                 ) :
