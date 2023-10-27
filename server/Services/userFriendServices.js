@@ -25,5 +25,14 @@ const deleteFriendRequest = async(req,res) =>{
     }
 }
 
+// // get friends list
+// const getFriends = async(req,res) =>{
+//     const userId = req.params.userId;
+//     try {
+//        const User = await User.findById({_id: userId});
+//     } catch (error) {
+//         res.status(500).json(error);
+//     }
+// }
 module.exports = {sendFriendsRequest,
                 deleteFriendRequest}

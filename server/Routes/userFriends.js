@@ -12,4 +12,9 @@ router.put('/deleteFriendRequest', function(req,res){
     userFriendServices.deleteFriendRequest(req,res);
 })
 
+//get friends list
+router.put('/getFriends', function(req,res){
+    userFriendServices.getFriends(req,res);
+})
+
 module.exports = router;

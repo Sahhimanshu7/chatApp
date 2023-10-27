@@ -2,6 +2,7 @@ import Search from '../components/Search';
 import './ChatPage.css';
 import photo from '../dummy images/back.JPG'  // to be retrived from database
 import RightSide from '../components/RightSide';
+import SearchLeft from '../components/Search2';
 
 function ChatPage(){
     const chatID = 1234; // TO be loaded from database later
@@ -19,6 +20,7 @@ function ChatPage(){
             <div className = "body">
                 {/* Divide the body into two parts for desktop => leftside and right side; for mobile use left as top and right as buttom; */}
                 <div className = "left-side">
+                    <SearchLeft />
                 </div>
                 <div className = "right-side">
                    <RightSide id={chatID}/>
