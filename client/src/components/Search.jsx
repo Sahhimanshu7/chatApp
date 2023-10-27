@@ -27,7 +27,7 @@ const Search = () =>{
     return(
         <div className = "search-box-friends">
             <div className="search-box">
-                <input type="text" name="keyword" placeholder="Search Accounts ... "
+                <input type="text" name="keyword" placeholder="Search Accounts username or email ...  "
                 onChange={(e) => {
                     setSearchInput(e.target.value);
                     if(e.target.value !== ''){
@@ -42,7 +42,7 @@ const Search = () =>{
                 />
             </div>
             <div className='show-friends-cards'>
-            <Card.Group itemsPerRow={3} className='cards'>
+            <Card.Group itemsPerRow={0} className='cards'>
                 {searchInput.length > 1 ? (
                     filteredResults.map((item,index=1) => {
                         index = index + 1;
