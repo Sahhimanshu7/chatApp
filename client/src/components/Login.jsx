@@ -27,8 +27,7 @@ const Login = () =>{
         });
     }
     return(
-        <div className="login-window">
-            
+        <div className="login-window"> 
             <form onSubmit={handleSubmit(onSubmit)} className="login-form" >    
                 <h1 className="login-head">Login</h1>
                 <input 
@@ -41,7 +40,6 @@ const Login = () =>{
                 type="password" name="password" placeholder="password" />
                 <input type="submit" value="Login" className="login-button"/>
             </form>
-            
         </div>
     )
 }  
