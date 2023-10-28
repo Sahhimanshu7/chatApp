@@ -18,9 +18,7 @@ const SearchLeft = () =>{
         }
         
     }, [searchInput]);
-    const handleAddFriendClick = (e) =>{
-        console.log(e);
-    };
+    
     const handleUserClick = (e) =>{
         console.log(e);
     } 

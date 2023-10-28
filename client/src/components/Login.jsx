@@ -9,7 +9,6 @@ const Login = () =>{
 
     const {register,handleSubmit} = useForm();
     const onSubmit = async(e) =>{
-        console.log("Hello");
         // Make a post request to the /api/auth/login
         const username = e.username;
         const password = e.password;
