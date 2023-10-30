@@ -1,0 +1,41 @@
+.searchLeft-box input{
+    width: 90%;
+}
+.showLeft-friends-cards{
+    position: relative;
+    left: -20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cLeft-card img{
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+}
+
+.cLeft-card{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #313131;
+
+    padding: 3px 10px;
+    margin: 8px 0px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.cLeft-card button{
+    width: 100%;
+    padding-left: 10px;
+}
+.iLeft-card{
+    width: 90%;
+}
+.cardsLeft{
+    padding: 0;
+    margin: 0;
+}
