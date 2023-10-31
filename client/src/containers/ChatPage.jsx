@@ -12,7 +12,9 @@ function ChatPage(){
                 <div className = "logo">Chat App</div>
                 <Search />
                 <div className = "profile-img">
-                    <button>
+                    <button onClick={(e) =>{
+                        
+                    }}>
                         <img src = {photo} alt = " " />
                     </button>
                 </div>
