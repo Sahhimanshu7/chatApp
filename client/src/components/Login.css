@@ -46,3 +46,7 @@ input{
     border-radius: 20px;
 }
 
+.login-window button{
+  border-radius: 10px;
+  background-color: red;
+}

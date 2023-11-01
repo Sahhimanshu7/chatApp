@@ -14,4 +14,6 @@ const getUser = async(req,res) =>{
     res.send(users);
 }
 
+
+
 module.exports = { getUser}
