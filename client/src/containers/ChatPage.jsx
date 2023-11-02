@@ -3,9 +3,13 @@ import './ChatPage.css';
 import photo from '../dummy images/back.JPG'  // To be retrived from database
 import RightSide from '../components/RightSide';    // Contains the chat box
 import SearchLeft from '../components/Search2';     // To search for the friends who are in the friendlist and can communicate with
+import { UserContext } from "../UserContext.jsx";
+import { useContext } from 'react';
 
 function ChatPage(){
     const chatID = 1234; // TO be loaded from database later
+    const User = useContext(UserContext);
+    console.log(User);
     return (
         <div className="chat-page">
             <div className="header">
@@ -13,7 +17,7 @@ function ChatPage(){
                 <Search />
                 <div className = "profile-img">
                     <button onClick={(e) =>{
-                        
+                                             
                     }}>
                         <img src = {photo} alt = " " />
                     </button>

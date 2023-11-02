@@ -48,5 +48,10 @@ input{
 
 .login-window button{
   border-radius: 10px;
-  background-color: red;
+  background-color: #4147C9;
+  padding: 4px 8px;
+
+  outline: none;
+  border: none;
+  margin-top: 15px;
 }

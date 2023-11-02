@@ -2,15 +2,20 @@ import './Login.css'    // importing css file
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
+import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { UserContext } from "../UserContext.jsx";   // Importing userCOntext from declaration 
 // To login user (The main page)
 // And to give users the option to sign up
 // Also update the value using useContext
 
-const Login = () =>{
+import { Link } from 'react-router-dom';
+import ChatPage from "../containers/ChatPage.jsx";
 
-    const {register,handleSubmit} = useForm();    // To handle form changes
-    
-    const onSubmit = async(e) =>{
+const Login = () =>{
+     const {register,handleSubmit} = useForm();    // To handle form changes
+     const [response, setResponse] = useState(null); 
+     const onSubmit = async(e) =>{
         // Make a post request to the /api/auth/login
         const username = e.username;
         const password = e.password;
@@ -20,7 +25,11 @@ const Login = () =>{
             password : password
         })
         .then((response) => {
-           console.log(response);   // Print to the console for now 
+            console.log(response); //temporary
+            setResponse(response.data);
+            return <UserContext.Provider value = {response.data}>
+              <ChatPage />
+            </UserContext.Provider>
         }).catch(e => {
             console.log("Error in login:", e);
         });
@@ -42,7 +51,7 @@ const Login = () =>{
                 type="password" name="password" placeholder="password" />
                 <input type="submit" value="Login" className="login-button"/>
             </form>
-            <button className = "register-link-button">Register Instead ?</button>    {/*This button directs to register a new account page*/}
+            <button className = "register-link-button">Register Instead ?</button>    {/*This button directs to register a new account page*/} 
         </div>
     )
 }  
