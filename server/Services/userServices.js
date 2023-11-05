@@ -14,6 +14,12 @@ const getUser = async(req,res) =>{
     res.send(users);
 }
 
+// Returning user data
+const getUserData = async(req,res) =>{
+    const keyword = req.query.userId;
+    const user = await User.findById(keyword);
+    console.log(user);
+    res.status(200).send(user);
+}
 
-
-module.exports = { getUser}
+module.exports = { getUser, getUserData };

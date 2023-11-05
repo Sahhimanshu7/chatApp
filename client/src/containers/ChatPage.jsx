@@ -1,15 +1,30 @@
 import Search from '../components/Search';
 import './ChatPage.css';
-import photo from '../dummy images/back.JPG'  // To be retrived from database
 import RightSide from '../components/RightSide';    // Contains the chat box
 import SearchLeft from '../components/Search2';     // To search for the friends who are in the friendlist and can communicate with
 import { UserContext } from "../UserContext.jsx";
 import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function ChatPage(){
     const chatID = 1234; // TO be loaded from database later
-    const User = useContext(UserContext);
-    console.log(User);
+    const userId = useParams();     // ID of the user logged in 
+   
+    // Make get request to the server for user data
+    if(userId.url) {
+     axios.get(`/api/userInfo/get-user-data/${userId.url}`)
+    .then((response) => {
+        if(response.status === 304){
+                console.log("Resources not modified, using cached data.")
+        }else {
+            console.log(response);
+        }
+    })
+    .catch((error) =>{
+            console.log(error);
+    })
+    }
     return (
         <div className="chat-page">
             <div className="header">
@@ -19,7 +34,6 @@ function ChatPage(){
                     <button onClick={(e) =>{
                                              
                     }}>
-                        <img src = {photo} alt = " " />
                     </button>
                 </div>
             </div>
