@@ -3,7 +3,7 @@ import './ChatPage.css';
 import RightSide from '../components/RightSide';    // Contains the chat box
 import SearchLeft from '../components/Search2';     // To search for the friends who are in the friendlist and can communicate with
 import { UserContext } from "../UserContext.jsx";
-import { useContext } from 'react';
+import { useContext,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -12,19 +12,19 @@ function ChatPage(){
     const userId = useParams();     // ID of the user logged in 
    
     // Make get request to the server for user data
-    if(userId.url) {
-     axios.get(`/api/userInfo/get-user-data/${userId.url}`)
+    useEffect(() =>{ 
+    axios.get(`/api/userInfo/get-user-data/${userId.url}`)
     .then((response) => {
         if(response.status === 304){
                 console.log("Resources not modified, using cached data.")
         }else {
-            console.log(response);
+            console.log(response.data);
         }
     })
     .catch((error) =>{
             console.log(error);
     })
-    }
+    },[userId.url]); 
     return (
         <div className="chat-page">
             <div className="header">

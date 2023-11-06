@@ -2,14 +2,14 @@ import './Login.css'    // importing css file
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
-import { useNavigate } from 'react-router-dom';
+import { useContext,useState } from 'react';
+import { UserContext } from '../UserContext.jsx';
 // To login user (The main page)
 // And to give users the option to sign up
 
 const Login = () =>{
      const {register,handleSubmit} = useForm();    // To handle form changes
 
-     const navigate = useNavigate();
      const onSubmit = async(e) =>{
         // Make a post request to the /api/auth/login
         const username = e.username;
@@ -20,8 +20,7 @@ const Login = () =>{
             password : password
         })
         .then((response) => {
-            const url = response.data._id;
-            navigate(`/chat-page/${url}`);
+            console.log(response);
         }).catch(e => {
             console.log("Error in login:", e);
         });
@@ -29,7 +28,7 @@ const Login = () =>{
     return(
         // Login-window to contain the login box
         // Also a button to redirect to the register
-
+        
         <div className="login-window"> 
             <form onSubmit={handleSubmit(onSubmit)} className="login-form" >    
                 <h1 className="login-head">Login</h1>

@@ -19,7 +19,7 @@ const getUserData = async(req,res) =>{
     const keyword = req.query.userId;
     const user = await User.findById(keyword);
     console.log(user);
-    res.status(200).send(user);
+    res.status(200).json(user);
 }
 
 module.exports = { getUser, getUserData };
