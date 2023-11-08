@@ -2,10 +2,9 @@ import Search from '../components/Search';
 import './ChatPage.css';
 import RightSide from '../components/RightSide';    // Contains the chat box
 import SearchLeft from '../components/Search2';     // To search for the friends who are in the friendlist and can communicate with
-import { UserContext } from "../UserContext.jsx";
-import { useContext,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 function ChatPage(){
     const chatID = 1234; // TO be loaded from database later
