@@ -13,11 +13,11 @@ import './index.css';
 import App from './App';
 
 import { Provider } from 'react-redux'
-import User from './redux/User';
+import { store } from './redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Provider User = {User}>
+    <Provider store = { store }>
         <App />
     </Provider>
 );
