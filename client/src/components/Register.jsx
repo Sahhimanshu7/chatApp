@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 // Redux import
 import { useDispatch, useSelector } from "react-redux";
 import { logInUser } from '../reduxFeatures/user.jsx';
+import Loading from './Loading.jsx';
 
 const Register = () =>{
 
@@ -24,12 +25,15 @@ const Register = () =>{
 
     const [isloggedIn, setIsLoggedIn] = useState(false);
 
+    const [loadingState, setLoadingState] = useState(false);
+
     // Redux 
     const dispatch = useDispatch();
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
     console.log(user, loggedIn, isLoading);
 
     const onSubmit = async(e) =>{
+         setLoadingState(true);
         // Make a post request to the /api/auth/register
         const username = e.username;
         const password = e.password;
@@ -58,6 +62,7 @@ const Register = () =>{
             const responseToSend = response.data;
             setUserApp(response.data);
             setIsLoggedIn(true);
+            setLoadingState(false);
             navigate('/');
         }).catch(e => {
             console.log(e);
@@ -69,8 +74,12 @@ const Register = () =>{
     },[userApp]);
 
     return(
+        
+
         <div className = "register-main">
         <Logo />
+            {loadingState ? 
+        <Loading /> :
         <div className="register-window">
             
             <form onSubmit={handleSubmit(onSubmit)} className="register-form" >    
@@ -121,8 +130,10 @@ const Register = () =>{
                 
             </form>
         </div>
+            }
         </div>
-    )
+        
+        )
 }  
 
 export default Register;

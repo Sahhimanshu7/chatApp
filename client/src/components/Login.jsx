@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 
 import { Link } from "react-router-dom";
-
+import Loading from './Loading.jsx';
 import { useEffect, useState } from 'react';
 // To login user (The main page)
 // And to give users the option to sign up
@@ -20,12 +20,15 @@ const Login = () =>{
 
     const [isloggedIn, setIsLoggedIn] = useState(false);
 
+    const [loadingState, setLoadingState] = useState(false);
+
     // Redux 
     const dispatch = useDispatch();
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
     console.log(user, loggedIn, isLoading);
     
     const onSubmit = async(e) =>{
+        setLoadingState(true);
         // Make a post request to the /api/auth/login
         const username = e.username;
         const password = e.password;
@@ -37,7 +40,8 @@ const Login = () =>{
         .then((response) => {
             const responseToSend = response.data;
             setUserApp(response.data);
-            setIsLoggedIn(true);    
+            setIsLoggedIn(true);
+            setLoadingState(false);
         }).catch(e => {
             console.log("Error in login:", e);
         });
@@ -50,9 +54,11 @@ const Login = () =>{
     return(
         // Login-window to contain the login box
         // Also a button to redirect to the register
-        
-        <div className="login-window"> 
-            <form onSubmit={handleSubmit(onSubmit)} className="login-form" >    
+        <>
+        {loadingState ? 
+        <Loading /> :
+        <div className="login-window">
+             <form onSubmit={handleSubmit(onSubmit)} className="login-form" >    
                 <h1 className="login-head">Login</h1>
                 <input 
                 {...register("username",
@@ -62,12 +68,17 @@ const Login = () =>{
                 {...register("password",
                 {required:"Please enter your password."})}
                 type="password" name="password" placeholder="password" />
+               
                 <input type="submit" value="Login" className="login-button"/>
+                
             </form>
             <Link to = "/register">
                 <button className = "register-link-button">Register Instead ?</button>    {/*This button directs to register a new account page*/} 
             </Link>
         </div>
+
+        }
+        </>
     )
 }  
 
