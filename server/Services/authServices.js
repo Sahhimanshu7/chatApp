@@ -1,12 +1,11 @@
 const User = require("../Models/User");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 // registering new user
 const registerUser = async(req,res) =>{
     try{
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password,salt);
-
         const newUser = new User({
             username:req.body.username,
             email:req.body.email,
@@ -15,8 +14,8 @@ const registerUser = async(req,res) =>{
             firstName:req.body.firstName,
             lastName:req.body.lastName,
             profilePicture:req.body.profilePicture,
-            backgroundPicture:req.body.backgroundPicture,
             about:req.body.about,
+            backgroundPicture:req.body.backgroundPicture,
             organization:req.body.organization,
             position:req.body.position,
             hobbies:req.body.hobbies,
@@ -24,10 +23,10 @@ const registerUser = async(req,res) =>{
             friendRequestReceived:req.body.friendRequestReceived,
             friendRequestSend:req.body.friendRequestSend
         });
-
         const user = await newUser.save();
         res.status(200).json(user);
     }catch(error){
+        console.log(error);
         res.status(500).json(error);
     }
 }
@@ -36,7 +35,6 @@ const registerUser = async(req,res) =>{
 const loginUser = async(req,res) =>{
     try{
         const user = await User.findOne({username:req.body.username});
-        console.log(user);
         if(user){
             const validPassword = await bcrypt.compare(req.body.password, user.password);
             if(validPassword){

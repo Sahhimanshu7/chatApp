@@ -11,7 +11,9 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         logInUser: (slate, action) =>{
-            return { user: action.payload}
+            return { user: action.payload.userApp,
+            loggedIn:action.payload.isloggedIn,
+            isLoading:false}
         }
     }
 });

@@ -5,6 +5,8 @@ import SearchLeft from '../components/Search2';     // To search for the friends
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useSelector } from "react-redux";
+import { logInUser } from "../reduxFeatures/user.jsx";
 
 function ChatPage(){
     const chatID = 1234; // TO be loaded from database later
@@ -24,6 +26,9 @@ function ChatPage(){
             console.log(error);
     })
     },[userId.url]); 
+    
+    const { user, loggedIn, isLoading } = useSelector((store) => store.user);
+    console.log(user);
     return (
         <div className="chat-page">
             <div className="header">

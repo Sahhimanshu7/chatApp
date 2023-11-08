@@ -2,6 +2,8 @@ import './Login.css'    // importing css file
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 
+import { Link } from "react-router-dom";
+
 import { useEffect, useState } from 'react';
 // To login user (The main page)
 // And to give users the option to sign up
@@ -9,15 +11,19 @@ import { useEffect, useState } from 'react';
 // Redux import 
 import { useDispatch, useSelector } from "react-redux";
 import { logInUser } from '../reduxFeatures/user.jsx';
-
 const Login = () =>{ 
     const {register,handleSubmit} = useForm();    // To handle form changes
-    const [appUser, setAppUser] = useState(null);
+    
+    const [userApp, setUserApp] = useState({});
+    
+    const [payload, setPayload] = useState({});
+
+    const [isloggedIn, setIsLoggedIn] = useState(false);
 
     // Redux 
     const dispatch = useDispatch();
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
-    console.log(user);
+    console.log(user, loggedIn, isLoading);
     
     const onSubmit = async(e) =>{
         // Make a post request to the /api/auth/login
@@ -29,16 +35,18 @@ const Login = () =>{
             password : password
         })
         .then((response) => {
-            console.log(response);
-            setAppUser(response.data);
+            const responseToSend = response.data;
+            setUserApp(response.data);
+            setIsLoggedIn(true);    
         }).catch(e => {
             console.log("Error in login:", e);
         });
     }
-    useEffect(() => {
-        dispatch(logInUser(appUser));
-        console.log(appUser);
-    }, [appUser]);
+
+    useEffect(()=>{
+        dispatch(logInUser({userApp, isloggedIn}));
+    },[userApp]);
+        
     return(
         // Login-window to contain the login box
         // Also a button to redirect to the register
@@ -56,7 +64,9 @@ const Login = () =>{
                 type="password" name="password" placeholder="password" />
                 <input type="submit" value="Login" className="login-button"/>
             </form>
-            <button className = "register-link-button">Register Instead ?</button>    {/*This button directs to register a new account page*/} 
+            <Link to = "/register">
+                <button className = "register-link-button">Register Instead ?</button>    {/*This button directs to register a new account page*/} 
+            </Link>
         </div>
     )
 }  

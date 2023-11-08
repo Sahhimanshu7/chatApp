@@ -1,0 +1,57 @@
+.register-window{
+   margin-left: 10%;
+
+    background: #7B7373;
+    width: 20%;
+    height: 500px;
+
+    border-radius: 20px;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    flex-direction: column; 
+}
+
+.register-form{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.register-head{
+    color:#060c78 ;
+    margin: 15px;
+}
+
+.register-button{
+    background-color: #7C80EC;
+    color: white;
+    border: none;
+    padding: 12px 25px 12px 25px;
+    border-radius: 20px;
+    margin: 10px;
+}
+
+.register-window button{
+    border-radius: 10px;
+    background-color: #4147C9;
+    padding: 6px 10px;
+
+    outline: none;
+    border: none;
+    margin-top: 15px;
+}
+
+.register-main{
+    width: 100%;
+    height: 100vh;
+    background: #343131;
+
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+}
