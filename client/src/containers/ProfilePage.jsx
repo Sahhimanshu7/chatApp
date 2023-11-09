@@ -1,13 +1,12 @@
 import React from 'react'
-import { useContext } from "react";
+import { useParams } from 'react-router-dom';
 
 export default function ProfilePage({id, user}) {
-  const User = useContext(UserContext);
-  console.log(User);
-  return (
+    const { userId, isCurrentUser } = useParams();  // Getting data from redirect 
+    return (
     <>
-    <div>ProfilePage of :{id}</div>
-    <div>User or not? :{user}</div>
+    <div>ProfilePage of :{ userId }</div>
+    <div>Current User or not? : {isCurrentUser}</div>
     </>
   )
 }
