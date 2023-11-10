@@ -16,8 +16,8 @@ const getUser = async(req,res) =>{
 
 // Returning user data
 const getUserData = async(req,res) =>{
-    const keyword = req.query.userId;
-    const user = await User.findById(keyword);
+    console.log(req.params);
+    const user = await User.findById(req.params.userId);
     console.log(user);
     res.status(200).json(user);
 }
