@@ -2,8 +2,8 @@ const User = require('../Models/User');
 
 // send friend request
 const sendFriendsRequest = async(req,res) =>{
-    const senderID = req.params.senderID;
-    const receiverID = req.params.receiverID;
+    const senderID = req.params.user._id;
+    const receiverID = req.params.userId;
     try {
         await User.findByIdAndUpdate(senderID, {$pull:{friendRequestSend:receiverID}});
         await User.findByIdAndUpdate(receiverID,{$pull:{friendRequestReceived:senderID}});

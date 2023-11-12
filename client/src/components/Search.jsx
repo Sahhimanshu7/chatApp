@@ -2,9 +2,11 @@ import './Search.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Card } from 'semantic-ui-react';
+import { useNavigate } from 'react-router-dom';
 
 const Search = () =>{
     const [APIData, setAPIData] = useState([]);
+    const navigate = useNavigate();
     const [searchInput, setSearchInput] = useState('');
     const [filteredResults, setFilteredResults] = useState([]);
     useEffect(() => {
@@ -22,7 +24,7 @@ const Search = () =>{
         console.log(e);
     };
     const handleUserClick = (e) =>{
-        console.log(e);
+        navigate(`/profilePage/${e}/${false}`);
     } 
     return(
         <div className = "search-box-friends">

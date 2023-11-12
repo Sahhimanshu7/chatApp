@@ -2,16 +2,21 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "./ProfilePage.css";
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
+import { logInUser } from "../reduxFeatures/user.jsx";
+
 export default function ProfilePage() {
     const { userId, isCurrentUser } = useParams();  // Getting data from redirect 
     
-    const [user, setUser] = useState(); 
+    const { user, loggedIn, isLoading } = useSelector((store) => store.user);
+
+    const [userLoad, setUserLoad] = useState(); 
     // Making a get request to get user data 
     const loadUser = async() =>{
         await axios.get(`/api/userinfo/get-user-data/${userId}` ) 
         .then((res) => {
-            setUser(res.data);
+            setUserLoad(res.data);
         })
         .catch(err => console.log(err))
     }
@@ -20,22 +25,30 @@ export default function ProfilePage() {
         loadUser();
         },[])
 
-    console.log(user);
+    const addFriend = async(e) =>{
+        e.preventDefault();
+        e.disabled = true;
+        
+        if(user._id === userId) return;
+        await axios.put(`/api/userFriends/sendFriendRequest/${user._id}/${userId}`)
 
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
     return (
         <div className = "profilepage-main">
             <div className = "profilepage-background">
                 
             </div>
             <div className = "profilepage-image">
-                {user? <img src = {user.profilePicture} alt = '' /> : ''}
+                {userLoad? <img src = {userLoad.profilePicture} alt = '' /> : ''}
             </div>
             <div className = "profilepage-name">
-                {user? <p className = "profilepage-actual-name">{user.firstName} {user.lastName}</p> : ''}
-                {user? <p className = 'profilepage-username'></p> : ''}
+                {userLoad? <p className = "profilepage-actual-name">{userLoad.firstName} {userLoad.lastName}</p> : ''}
+                {userLoad? <p className = 'profilepage-username'></p> : ''}
             </div>
             <div className = "profilepage-edit-selection">
-                {user? 
+                {userLoad? 
                     <div className = "profilepage-selection">
                         {isCurrentUser === "true"?
                             <div className = "profilepage-edit">
@@ -43,14 +56,14 @@ export default function ProfilePage() {
                             </div>
                             :
                             <div className = "profilepage-addFriend">
-                                <button>Add Friend</button>
+                                <button onClick = {(e => addFriend(e))}>Add Friend</button>
                             </div>
                         }
                     </div>
                     :
                     ''
                 }
-            </div>
+            </div> 
         </div> 
   )
 }   
