@@ -12,6 +12,7 @@ const mongoose = require('mongoose');
 const authRoute = require('./Routes/auth');
 const userInfo = require('./Routes/userInfo');
 const chatRoutes = require('./Routes/chatRoutes');
+const userFriends = require('./Routes/userFriends.js');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -39,6 +40,9 @@ app.use('/api/auth/', authRoute);
 app.use('/api/userinfo/',userInfo);
 
 app.use('/api/chatapp/', chatRoutes);
+
+// Updating friends 
+app.use('/api/user-friends/', userFriends);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);

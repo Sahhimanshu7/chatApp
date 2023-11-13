@@ -14,6 +14,7 @@ function ChatPage(){
     const navigate = useNavigate();
 
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
+    
     return (
         <div className="chat-page">
             <div className="header">

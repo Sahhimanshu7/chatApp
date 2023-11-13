@@ -3,8 +3,7 @@ const router = express.Router();
 const userFriendServices = require('../Services/userFriendServices');
 
 //send friend request
-router.put('/sendFriendRequest/:user._id/:userId', function(req,res){
-    
+router.put('/send-request/', function(req,res){
     userFriendServices.sendFriendsRequest(req,res);
 });
 

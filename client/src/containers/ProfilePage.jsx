@@ -11,6 +11,7 @@ export default function ProfilePage() {
     
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
 
+    console.log(user);
     const [userLoad, setUserLoad] = useState(); 
     // Making a get request to get user data 
     const loadUser = async() =>{
@@ -26,12 +27,11 @@ export default function ProfilePage() {
         },[])
 
     const addFriend = async(e) =>{
-        e.preventDefault();
-        e.disabled = true;
-        
-        if(user._id === userId) return;
-        await axios.put(`/api/userFriends/sendFriendRequest/${user._id}/${userId}`)
-
+        console.log(user);
+        await axios.put("/api/user-friends/send-request/", {
+            senderID : user._id,
+            receiverID : userId
+        })
         .then(res => console.log(res))
         .catch(err => console.log(err));
     }
