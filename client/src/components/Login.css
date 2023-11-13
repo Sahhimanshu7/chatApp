@@ -56,4 +56,24 @@ input{
   margin-top: 15px;
 }
 
+p{
+    color: white;
+    font-size: 24px;
+}
 
+.register-instead{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 10%;
+    margin-left: 60px;
+}
+
+.register-instead button{
+    color: aliceblue;
+    background-color: #060c78;
+    padding: 6px 10px;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+}

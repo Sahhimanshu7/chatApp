@@ -11,21 +11,17 @@ import { useEffect, useState } from 'react';
 // Redux import 
 import { useDispatch, useSelector } from "react-redux";
 import { logInUser } from '../reduxFeatures/user.jsx';
+
 const Login = () =>{ 
     const {register,handleSubmit} = useForm();    // To handle form changes
-    
     const [userApp, setUserApp] = useState({});
-    
-    const [payload, setPayload] = useState({});
-
     const [isloggedIn, setIsLoggedIn] = useState(false);
-
     const [loadingState, setLoadingState] = useState(false);
+    const [userNotFound, setUserNotFound] = useState(false);
 
     // Redux 
     const dispatch = useDispatch();
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
-    console.log(user, loggedIn, isLoading);
     
     const onSubmit = async(e) =>{
         setLoadingState(true);
@@ -38,12 +34,12 @@ const Login = () =>{
             password : password
         })
         .then((response) => {
-            const responseToSend = response.data;
             setUserApp(response.data);
             setIsLoggedIn(true);
             setLoadingState(false);
         }).catch(e => {
             console.log("Error in login:", e);
+            setUserNotFound(true);
         });
     }
 
@@ -73,11 +69,23 @@ const Login = () =>{
                 
             </form>
             <Link to = "/register">
-                <button className = "register-link-button">Register Instead ?</button>    {/*This button directs to register a new account page*/} 
+                {/*This button directs to register a new account page*/}
+                <button className = "register-link-button">Register Instead ?</button>     
             </Link>
         </div>
 
         }
+
+        {userNotFound ? 
+        <div className='register-instead'>
+        <p>Sorry :( We couldn't find your Account </p>
+        <Link to = "/register">
+             {/*This button directs to register a new account page*/}
+            <button className = "register-link-button">Register Instead ?</button>    
+        </Link>
+        </div>
+    :
+    ' '}
         </>
     )
 }  

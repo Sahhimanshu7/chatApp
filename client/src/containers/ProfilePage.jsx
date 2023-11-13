@@ -11,7 +11,6 @@ export default function ProfilePage() {
     
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
 
-    console.log(user);
     const [userLoad, setUserLoad] = useState(); 
     // Making a get request to get user data 
     const loadUser = async() =>{
