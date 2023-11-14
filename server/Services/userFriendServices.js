@@ -25,9 +25,26 @@ const deleteFriendRequest = async(req,res) =>{
     }
 }
 
-// show friend requests
+// accept friend request
+const acceptFriendReq = async(req,res) =>{
+    console.log("HEllo");
+    const userID = req.body.userID;
+    const reqID = req.body.reqID;
+    console.log(userID,reqID);
+    try {
+        await User.findByIdAndUpdate(userID,{$pull:{friendRequestReceived:reqID}});
+        await User.findByIdAndUpdate(reqID,{$pull:{friendRequestSend:userID}});
+
+        await User.findByIdAndUpdate(userID,{$push:{friends:reqID}});
+        await User.findByIdAndUpdate(reqID,{$push:{friends:userID}});
+        res.status(200).json("Request Accepted!");
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
 
 
 
 module.exports = {sendFriendsRequest,
-                deleteFriendRequest}
+                deleteFriendRequest,
+            acceptFriendReq}

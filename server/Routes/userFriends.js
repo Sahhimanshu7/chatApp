@@ -17,4 +17,9 @@ router.put('/getFriends', function(req,res){
     userFriendServices.getFriends(req,res);
 })
 
+// accpet friend
+router.put('/accept-req/',function(req,res){
+    userFriendServices.acceptFriendReq(req,res);
+})
+
 module.exports = router;
