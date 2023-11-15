@@ -33,7 +33,7 @@ function ChatPage(){
                     <SearchLeft />
                 </div>
                 <div className = "right-side">
-                   <RightSide id={chatID}/>
+                   <RightSide id={chatID} selected={true}/>
                 </div>
             </div>
         </div>

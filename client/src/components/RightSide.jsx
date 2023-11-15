@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './RightSide.css';
 import back from '../dummy images/arrow.svg';
 import audio from '../dummy images/audio.png';
@@ -6,13 +6,15 @@ import video from '../dummy images/video.png';
 
 import photo from '../dummy images/back.JPG';
 
+import { useSelector } from "react-redux";
+
 export default function RightSide({id}) {
     console.log(id.toString());
     // display the chat 
     // design the header body and footer 
 
     // Object will be passed down from the parent component
-    const user = {
+    const users = {
         "name": "Roji Lama",
         "userName": "ijor98"
     }
@@ -26,15 +28,27 @@ export default function RightSide({id}) {
         {"sender": "1234", "content": "We are great friends for a long time and we have done a lot of business together"}
     ]
 
+    const { friend, chatId, isSelected } = useSelector((store) => store.chat);
+
+    const { user, loggedIn, isLoading } = useSelector((store) => store.user);
+
+    
+
+
   return (
     <div className='right-side-comp'>
+        <>
+        {isSelected ? 
+        
+    
+   <>
         <div className='right-comp-header'>
             <div className='right-header-left'>
                 <img src={back} alt='' />
                 <img src={photo} alt='' />
                 <div className='chat-name-display'>
                     <button>
-                    <h4>{user.userName}</h4>
+                    <h4>{user.username}</h4>
                     <p>{user.name}</p>
                     </button>
                 </div> 
@@ -92,6 +106,12 @@ export default function RightSide({id}) {
                 <button type='submit'>send</button>
             </form>
         </div>
+        </>
+        : <div className='select-user-message'>
+            <p>Hello</p>
+        </div>
+         }
+         </>
     </div>
   )
 }

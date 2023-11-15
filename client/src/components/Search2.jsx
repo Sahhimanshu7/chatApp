@@ -2,14 +2,25 @@ import './Search2.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Card } from 'semantic-ui-react';
-import { useSelector } from "react-redux";
-import { logInUser } from "../reduxFeatures/user.jsx";
+
+// Redux import 
+import { useDispatch, useSelector } from "react-redux";
+import { selectChat } from '../reduxFeatures/chat.jsx';
+
 
 const SearchLeft = () =>{
     const [APIData, setAPIData] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [filteredResults, setFilteredResults] = useState([]);
 
+    const [friendApp, setFriendApp] = useState({});
+    const [chatIdApp, setChatIdApp] = useState();
+    const [isSelectedApp, setIsSelectedApp] = useState(false);
+
+    // Redux 
+    const dispatch = useDispatch();
+    const { friend, chatId, isSelected } = useSelector((store) => store.chat);
+    console.log(friend);
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
     const userID = user._id;
     useEffect(() => {
@@ -24,9 +35,38 @@ const SearchLeft = () =>{
         
     }, [searchInput]);
     
-    const handleUserClick = (e) =>{
+    const handleUserClick = async(e) =>{
         console.log(e);
+        const userId = e;
+        await axios.get(`/api/userinfo/get-user-data/${userId}` ) 
+        .then((res) => {
+            setFriendApp(res.data);
+        })
+        .catch(err => console.log(err))
+
+        setIsSelectedApp(true);
+        
+        await axios.post(`/api/chatapp/getchat/`,{
+            id: userID,
+            friendid: e   
+        })
+        .then((res)=>{
+            console.log(res.data);
+            setChatIdApp(res.data._id)
+        })
+        .catch((err) =>{
+            console.log(err);
+        })
+
+        setIsSelectedApp(true)
     } 
+
+    useEffect(()=>{
+        
+        dispatch(selectChat({friendApp, chatIdApp, isSelectedApp}));
+        
+    },[friendApp])
+
     return(
         <div className = "searchLeft-box-friends">
             <div className="searchLeft-box">
@@ -50,23 +90,17 @@ const SearchLeft = () =>{
                     filteredResults.map((item,index=1) => {
                         index = index + 1;
                         return (
-                            
-                            <Card className='i-card'>
-                               
-                                <Card.Content className='c-card'>
-                                    
-                                    <img src={item.profilePicture} alt='pp' />
-                                    
+                            <Card className='i-card'>   
+                                <Card.Content className='c-card'>                                  
+                                    <img src={item.profilePicture} alt='pp' />                        
                                     <Card.Description>
                                     <button key={index} onClick={()=>handleUserClick(item._id)} className='big-button'>
                                       <h1>{item.username}</h1>
                                       <p>  {item.email}</p>
                                       </button>
                                     </Card.Description>
-                                </Card.Content>
-                                
-                            </Card>
-                            
+                                </Card.Content>             
+                            </Card> 
                         )
                     })
                 ) :
