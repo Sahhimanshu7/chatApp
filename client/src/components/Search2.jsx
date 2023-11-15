@@ -2,14 +2,19 @@ import './Search2.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Card } from 'semantic-ui-react';
+import { useSelector } from "react-redux";
+import { logInUser } from "../reduxFeatures/user.jsx";
 
 const SearchLeft = () =>{
     const [APIData, setAPIData] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [filteredResults, setFilteredResults] = useState([]);
+
+    const { user, loggedIn, isLoading } = useSelector((store) => store.user);
+    const userID = user._id;
     useEffect(() => {
         try {
-            axios.get(`/api/userinfo/get-user/:${searchInput}`)
+            axios.get(`/api/userinfo/get-user-friends/:${searchInput}/${userID}`)
             .then((response) => {
                 setAPIData(response.data);
             })
@@ -40,15 +45,15 @@ const SearchLeft = () =>{
                 />
             </div>
             <div className='showLeft-friends-cards'>
-            <Card.Group itemsPerRow={0} className='cardsLeft'>
+            <Card.Group itemsPerRow={0} className='cards'>
                 {searchInput.length > 1 ? (
                     filteredResults.map((item,index=1) => {
                         index = index + 1;
                         return (
                             
-                            <Card className='iLeft-card'>
+                            <Card className='i-card'>
                                
-                                <Card.Content className='cLeft-card'>
+                                <Card.Content className='c-card'>
                                     
                                     <img src={item.profilePicture} alt='pp' />
                                     
