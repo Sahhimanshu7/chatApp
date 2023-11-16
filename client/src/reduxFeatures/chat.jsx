@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     friend:{},
-    chatId: null,
+    chatId: {},
     isSelected: false
 };
 
@@ -12,8 +12,8 @@ const chatSlice = createSlice({
     reducers: {
         selectChat: (slate, action) =>{
             return { friend: action.payload.friendApp,
-            chatId:action.payload.chatId,
-            isSelected:true}
+            chatId:action.payload.chatIdApp,
+            isSelected:action.payload.isSelectedApp}
         }
     }
 });

@@ -14,13 +14,13 @@ const SearchLeft = () =>{
     const [filteredResults, setFilteredResults] = useState([]);
 
     const [friendApp, setFriendApp] = useState({});
-    const [chatIdApp, setChatIdApp] = useState();
+    const [chatIdApp, setChatIdApp] = useState({});
     const [isSelectedApp, setIsSelectedApp] = useState(false);
 
     // Redux 
     const dispatch = useDispatch();
     const { friend, chatId, isSelected } = useSelector((store) => store.chat);
-    console.log(friend);
+
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
     const userID = user._id;
     useEffect(() => {
@@ -51,8 +51,7 @@ const SearchLeft = () =>{
             friendid: e   
         })
         .then((res)=>{
-            console.log(res.data);
-            setChatIdApp(res.data._id)
+            setChatIdApp(res.data)
         })
         .catch((err) =>{
             console.log(err);
@@ -65,7 +64,7 @@ const SearchLeft = () =>{
         
         dispatch(selectChat({friendApp, chatIdApp, isSelectedApp}));
         
-    },[friendApp])
+    },[friendApp, chatIdApp, isSelectedApp]);
 
     return(
         <div className = "searchLeft-box-friends">
@@ -85,7 +84,7 @@ const SearchLeft = () =>{
                 />
             </div>
             <div className='showLeft-friends-cards'>
-            <Card.Group itemsPerRow={0} className='cards'>
+            <Card.Group itemsPerRow={0} className='cards left'>
                 {searchInput.length > 1 ? (
                     filteredResults.map((item,index=1) => {
                         index = index + 1;

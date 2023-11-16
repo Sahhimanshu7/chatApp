@@ -30,6 +30,8 @@ export default function RightSide({id}) {
 
     const { friend, chatId, isSelected } = useSelector((store) => store.chat);
 
+    console.log(friend,isSelected,chatId);
+
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
 
     
