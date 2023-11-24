@@ -9,6 +9,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
 
+// These modules are imported to apply socket.io
+const { createServer } = require("node:http");
+const { Server } = require("socket.io");
+
 const authRoute = require('./Routes/auth');
 const userInfo = require('./Routes/userInfo');
 const chatRoutes = require('./Routes/chatRoutes');
@@ -16,9 +20,9 @@ const userFriends = require('./Routes/userFriends.js');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
+const httpServer = createServer(app);
 
-
-const fs = require('fs');
+const io = new Server(httpServer, {cors: {origin: '*'}});
 
 dotenv.config();
 
@@ -44,7 +48,12 @@ app.use('/api/chatapp/', chatRoutes);
 // Updating friends 
 app.use('/api/user-friends/', userFriends);
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
 
+
+io.on("connection", (socket) => {
+  const session = socket.id;
+  console.log(session);
+});
