@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 export default function RightSide({id}) {
     console.log(id.toString());
     // display the chat 
-    // design the header body and footer 
 
     // Object will be passed down from the parent component
     const users = {
@@ -66,7 +65,8 @@ export default function RightSide({id}) {
         </div>
         <div className='right-body'>
             {messages.map((message) => {
-            
+            // These if statements are used for logic to determine
+            // the text is from sender or the receiver 
             if(message.sender === id.toString() && (prevId === " " || prevId === "5678")){
                 prevId = id.toString();
                 return(
