@@ -17,3 +17,18 @@
     align-content: center;
     justify-content: center;
 }
+
+/* Mobile interface  */
+
+@media screen and (max-width: 720px) {
+    .homepage{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .register-main{
+        display: flex;
+        flex-direction: column;
+    }
+}

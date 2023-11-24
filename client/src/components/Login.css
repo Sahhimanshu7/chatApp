@@ -77,3 +77,12 @@ p{
     border: none;
     border-radius: 20px;
 }
+
+/* Mobile interface  */
+
+@media screen and (max-width: 720px) {
+    .login-window{
+        width: 60%;
+        margin-left: 0;
+    }
+}
