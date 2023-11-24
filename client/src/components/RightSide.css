@@ -116,3 +116,13 @@
     border-radius: 50%;
     margin: 10px;
 }
+
+.select-user-message{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    top:60px;
+}

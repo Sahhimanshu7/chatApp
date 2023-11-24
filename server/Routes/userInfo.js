@@ -35,7 +35,6 @@ router.get('/get-user-friends/:search/:userID', function(req,res){
 
 // returning user data
 router.get('/get-user-data/:userId', function(req,res){
-    console.log(req.params['userId']);
     userServices.getUserData(req,res);
 })
 

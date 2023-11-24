@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './RightSide.css';
 import back from '../dummy images/arrow.svg';
 import audio from '../dummy images/audio.png';
@@ -8,16 +8,12 @@ import photo from '../dummy images/back.JPG';
 
 import { useSelector } from "react-redux";
 
+import { socket } from "../Socket";
+
 export default function RightSide({id}) {
-    console.log(id.toString());
-    // display the chat 
 
-    // Object will be passed down from the parent component
-    const users = {
-        "name": "Roji Lama",
-        "userName": "ijor98"
-    }
-
+    const [socketConnection, setSocketConnection] = useState(false);
+    
     let prevId = " ";
     const messages = [
         {"sender": "1234", "content": "Hi"},
@@ -33,7 +29,14 @@ export default function RightSide({id}) {
 
     const { user, loggedIn, isLoading } = useSelector((store) => store.user);
 
-    
+    useEffect(()=>{
+        if(isSelected){ 
+            socket.emit('setup', user);
+            socket.on("connection", () => setSocketConnection(true));
+
+            socket.emit("join chat", chatId._id);
+        }
+    },[isSelected,chatId])
 
 
   return (
@@ -110,7 +113,8 @@ export default function RightSide({id}) {
         </div>
         </>
         : <div className='select-user-message'>
-            <p>Hello</p>
+            <p>No chat Selected.</p>
+            <p>Select a chat or search for a friend to get started.</p>
         </div>
          }
          </>

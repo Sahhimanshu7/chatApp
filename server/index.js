@@ -12,6 +12,7 @@ const mongoose = require('mongoose');
 // These modules are imported to apply socket.io
 const { createServer } = require("node:http");
 const { Server } = require("socket.io");
+const eiows = require("eiows");
 
 const authRoute = require('./Routes/auth');
 const userInfo = require('./Routes/userInfo');
@@ -22,7 +23,14 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 const httpServer = createServer(app);
 
-const io = new Server(httpServer, {cors: {origin: '*'}});
+const io = new Server(httpServer, 
+                      {
+                        pingTimeout: 60000,
+                        cors: {origin: 'http://localhost:3000'}
+                      },
+                      {
+                        wsEngine: eiows.Server
+                      });
 
 dotenv.config();
 
@@ -54,6 +62,12 @@ httpServer.listen(PORT, () => {
 
 
 io.on("connection", (socket) => {
-  const session = socket.id;
-  console.log(session);
+  socket.on('setup', (userData) => {
+    socket.join(userData._id);
+    socket.emit("connected");
+  })
+
+  socket.on("join chat", (room)=>{
+    socket.join(room);
+  })
 });

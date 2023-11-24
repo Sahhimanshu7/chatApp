@@ -30,7 +30,6 @@ const acceptFriendReq = async(req,res) =>{
     console.log("HEllo");
     const userID = req.body.userID;
     const reqID = req.body.reqID;
-    console.log(userID,reqID);
     try {
         await User.findByIdAndUpdate(userID,{$pull:{friendRequestReceived:reqID}});
         await User.findByIdAndUpdate(reqID,{$pull:{friendRequestSend:userID}});
