@@ -4,7 +4,6 @@
 
 //            server starts here
 
-
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require('mongoose');
@@ -17,6 +16,7 @@ const eiows = require("eiows");
 const authRoute = require('./Routes/auth');
 const userInfo = require('./Routes/userInfo');
 const chatRoutes = require('./Routes/chatRoutes');
+const messageRoutes = require('./Routes/messageRoutes.js');
 const userFriends = require('./Routes/userFriends.js');
 
 const PORT = process.env.PORT || 8080;
@@ -51,7 +51,9 @@ app.use('/api/auth/', authRoute);
 // updating user info             -- Incomplete
 app.use('/api/userinfo/',userInfo);
 
+// Messages and chats
 app.use('/api/chatapp/', chatRoutes);
+app.use('/api/messages/', messageRoutes);
 
 // Updating friends 
 app.use('/api/user-friends/', userFriends);

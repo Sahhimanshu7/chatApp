@@ -8,11 +8,11 @@ import photo from '../dummy images/back.JPG';
 
 import { useSelector } from "react-redux";
 
-import { socket } from "../Socket";
+// import { socket } from "../Socket";
 
 export default function RightSide({id}) {
 
-    const [socketConnection, setSocketConnection] = useState(false);
+    // const [socketConnection, setSocketConnection] = useState(false);
     
     let prevId = " ";
     const messages = [
@@ -23,20 +23,23 @@ export default function RightSide({id}) {
         {"sender": "1234", "content": "We are great friends for a long time and we have done a lot of business together"}
     ]
 
+    //Send new message
+    
+
     const { friend, chatId, isSelected } = useSelector((store) => store.chat);
 
     console.log(friend,isSelected,chatId);
 
-    const { user, loggedIn, isLoading } = useSelector((store) => store.user);
+    const { user } = useSelector((store) => store.user);
 
-    useEffect(()=>{
-        if(isSelected){ 
-            socket.emit('setup', user);
-            socket.on("connection", () => setSocketConnection(true));
+    // useEffect(()=>{
+    //     if(isSelected){ 
+    //         socket.emit('setup', user);
+    //         socket.on("connection", () => setSocketConnection(true));
 
-            socket.emit("join chat", chatId._id);
-        }
-    },[isSelected,chatId])
+    //         socket.emit("join chat", chatId._id);
+    //     }
+    // },[isSelected,chatId])
 
 
   return (
