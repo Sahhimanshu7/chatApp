@@ -60,7 +60,6 @@ httpServer.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
 
-
 io.on("connection", (socket) => {
   socket.on('setup', (userData) => {
     socket.join(userData._id);
