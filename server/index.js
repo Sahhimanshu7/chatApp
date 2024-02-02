@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 // These modules are imported to apply socket.io
 const { createServer } = require("node:http");
 const { Server } = require("socket.io");
-const eiows = require("eiows");
+// const eiows = require("eiows");
 
 const authRoute = require('./Routes/auth');
 const userInfo = require('./Routes/userInfo');
@@ -23,14 +23,14 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 const httpServer = createServer(app);
 
-const io = new Server(httpServer, 
-                      {
-                        pingTimeout: 60000,
-                        cors: {origin: 'http://localhost:3000'}
-                      },
-                      {
-                        wsEngine: eiows.Server
-                      });
+// const io = new Server(httpServer, 
+//                       {
+//                         pingTimeout: 60000,
+//                         cors: {origin: 'http://localhost:3000'}
+//                       },
+//                       {
+//                         wsEngine: eiows.Server
+//                       });
 
 dotenv.config();
 
@@ -62,13 +62,13 @@ httpServer.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
 
-io.on("connection", (socket) => {
-  socket.on('setup', (userData) => {
-    socket.join(userData._id);
-    socket.emit("connected");
-  })
+// io.on("connection", (socket) => {
+//   socket.on('setup', (userData) => {
+//     socket.join(userData._id);
+//     socket.emit("connected");
+//   })
 
-  socket.on("join chat", (room)=>{
-    socket.join(room);
-  })
-});
+//   socket.on("join chat", (room)=>{
+//     socket.join(room);
+//   })
+// });

@@ -23,11 +23,11 @@ const registerUser = async(req,res) =>{
             friendRequestReceived:req.body.friendRequestReceived,
             friendRequestSend:req.body.friendRequestSend
         });
-        const user = await newUser.save();
-        res.status(200).json(user);
+        await newUser.save();
+        res.status(200).json("New User Created!");
     }catch(error){
-        console.log(error);
         res.status(500).json(error);
+        throw new Error("Error in registration of new user: ", error); 
     }
 }
 
@@ -36,7 +36,7 @@ const loginUser = async(req,res) =>{
     try{
         const user = await User.findOne({username:req.body.username});
         if(user){
-            const validPassword = await bcrypt.compare(req.body.password, user.password);
+            const validPassword = bcrypt.compare(req.body.password, user.password);
             if(validPassword){
                 res.status(200).json(user);
             }else{
@@ -50,5 +50,4 @@ const loginUser = async(req,res) =>{
     }
 }
 
-module.exports = { registerUser,
-                    loginUser}
+module.exports = { registerUser, loginUser }

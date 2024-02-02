@@ -23,6 +23,10 @@ export default function ProfilePage() {
         .catch(err => console.log(err))
     }
 
+    const logout = () =>{
+        console.log("Logout");
+    }
+
     // Only if its loggedIn user's profile
     const loadFriendRequestReceived = async(e) =>{
         await axios.get(`/api/userinfo/get-user-data/${e}`)
@@ -48,6 +52,7 @@ export default function ProfilePage() {
     }
     },[userLoad])
 
+    //Sending friend requests
     const addFriend = async(e) =>{
         await axios.put("/api/user-friends/send-request/", {
             senderID : user._id,
@@ -96,7 +101,7 @@ export default function ProfilePage() {
                 }
                 {isCurrentUser === "true" ? 
                 <div className = "profilepage-logout">
-                    <button className='Logout'>Log out</button>
+                    <button className='Logout' onClick={(e => logout())}>Log out</button>
                 </div>
                 :
                 " "

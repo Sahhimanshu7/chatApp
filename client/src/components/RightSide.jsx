@@ -24,7 +24,12 @@ export default function RightSide({id}) {
     ]
 
     //Send new message
-    
+    // const sendMessage = async(sender, chat) =>{
+    //     axios
+    //       .post("")
+    //       .then(res => )
+    //       .catch(err => console.error(err));
+    // }
 
     const { friend, chatId, isSelected } = useSelector((store) => store.chat);
 

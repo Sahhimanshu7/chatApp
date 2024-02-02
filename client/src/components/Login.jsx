@@ -44,7 +44,7 @@ const Login = () =>{
     }
 
     useEffect(()=>{
-        dispatch(logInUser({userApp, isloggedIn}));
+        dispatch(logInUser({ userApp, isloggedIn }));
     },[userApp]);
         
     return(

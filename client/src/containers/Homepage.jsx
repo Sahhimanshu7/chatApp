@@ -10,6 +10,8 @@ import { loggInUser } from "../reduxFeatures/user.jsx";
 function Homepage(){
     const {loggedIn, isLoading} = useSelector((store) => store.user);
 
+    console.log(loggedIn);
+
     return(<div className="homepage">
         {loggedIn ? 
         <ChatPage />
