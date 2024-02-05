@@ -1,74 +1,76 @@
-// 
+import express, { urlencoded } from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import { Server } from "socket.io";
 
-//        copyright @ Himanshu Sah 2023
+import "./config/mongo.js";
 
-//            server starts here
+import { VerifyToken, VerifySocketToken } from "./middlewares/VerifyToken.js";
 
-const express = require("express");
-const dotenv = require("dotenv");
-const mongoose = require('mongoose');
+import userRoutes from "./routes/user.js";
+import chatMessageRoutes from "./routes/chatMessage.js";
+import chatRoomRoutes from "./routes/chatRoom.js";
 
-// These modules are imported to apply socket.io
-const { createServer } = require("node:http");
-const { Server } = require("socket.io");
-// const eiows = require("eiows");
-
-const authRoute = require('./Routes/auth');
-const userInfo = require('./Routes/userInfo');
-const chatRoutes = require('./Routes/chatRoutes');
-const messageRoutes = require('./Routes/messageRoutes.js');
-const userFriends = require('./Routes/userFriends.js');
-
-const PORT = process.env.PORT || 8080;
 const app = express();
-const httpServer = createServer(app);
-
-// const io = new Server(httpServer, 
-//                       {
-//                         pingTimeout: 60000,
-//                         cors: {origin: 'http://localhost:3000'}
-//                       },
-//                       {
-//                         wsEngine: eiows.Server
-//                       });
 
 dotenv.config();
 
-//Mongoose connection establishment and check
-mongoose.connect(process.env.ATLAS_URI, {useNewUrlParser:true,useUnifiedTopology:true}).
-then(()=>{
-    console.log("Connected to database");
-}).catch(e=>{
-    console.log("Error ",e);
-})
-
-//middleware
+app.use(cors());
 app.use(express.json());
+app.use(urlencoded({ extended: true }));
 
-// Authentication route
-app.use('/api/auth/', authRoute);
+app.use(VerifyToken);
 
-// updating user info             -- Incomplete
-app.use('/api/userinfo/',userInfo);
+const PORT = process.env.PORT || 8080;
 
-// Messages and chats
-app.use('/api/chatapp/', chatRoutes);
-app.use('/api/messages/', messageRoutes);
+// Implementing routes
+app.use("/api/user", userRoutes);                       // User Route (Auth and get list)
 
-// Updating friends 
-app.use('/api/user-friends/', userFriends);
+app.use("/api/room", chatRoomRoutes);                   // Room routes
 
-httpServer.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}!`);
+app.use("/api/message", chatMessageRoutes);             // Chat messages
+
+const server = app.listen(PORT, () =>{
+    console.log(`Server is lintening on ${PORT}`);
 });
 
-// io.on("connection", (socket) => {
-//   socket.on('setup', (userData) => {
-//     socket.join(userData._id);
-//     socket.emit("connected");
-//   })
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        credentials: true,
+    },
+});
 
-//   socket.on("join chat", (room)=>{
-//     socket.join(room);
-//   })
-// });
+io.use(VerifySocketToken);
+
+global.onlineUsers = new Map();
+
+const getKey = (map, val) =>{
+    for (let [key, value] of map.entries()){
+        if(value === val) return key;
+    }
+};
+
+io.on("connection", (socket) =>{
+    global.chatSocket = socket;
+
+    socket.on("addUser", (userId) =>{
+        onlineUser.set(userId, socket.id);
+        socket.emit("getUsers", Array.from(onlineUsers));
+    });
+
+    socket.on("sendMessage", ({ senderId, receiverId, message })=>{
+        const sendUserSocket = onlineUsers.get(receiverId);
+        if(sendUserSocket){
+            socket.to(sendUserSocket).emit("getMessage", {
+                senderId,
+                message,
+            });
+        }
+    });
+
+    socket.on("disconnect", () =>{
+        onlineUsers.delete(getKey(onlineUsers, socket.id));
+        socket.emit("getUsers", Array.from(onlineUsers));
+    });
+});
