@@ -1,5 +1,10 @@
 server/node_modules
-.env
+
+## environment variables
+server/.env
 
 ## configs
 server/config/serviceAccountKey.json
+
+## locked files
+server/package-lock.json
