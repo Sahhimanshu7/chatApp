@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import "../../assests/register.css";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -39,7 +40,27 @@ export default function Register() {
 
     return (
         <div className="register">
-            
+            <div className="left-side-register">
+                <h1 className="left-header-logo">
+                    Connecting People Around The World
+                </h1>
+            </div>
+            <div className="right-side-register">
+
+                <h1 className="form-header">
+                    Register your account.
+                </h1>
+                
+                <form onSubmit={handleFormSubmit}>
+
+                </form>
+
+                <Link to= "/login">
+                    <p className="link-to-login">
+                        Already have an account? Login.
+                    </p>
+                </Link>
+            </div>
         </div>
     )
 }

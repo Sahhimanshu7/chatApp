@@ -1,0 +1,17 @@
+.register{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 90vh;
+    padding: 45px;
+}
+
+.left-header-logo{
+    font-size: 50px;
+    flex-wrap: wrap;
+    width: 45vw;
+
+    color: #5061FF;
+    font-family: Arial, Helvetica, sans-serif;
+}

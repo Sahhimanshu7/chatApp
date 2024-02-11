@@ -7,8 +7,6 @@ import { useAuth } from "../../context/AuthContext";
 import "../../assests/header.css";
 
 export default function Header() {
-    const [modal, setModal] = useState(false);
-
     const { currentUser } = useAuth();
 
     return(
@@ -22,7 +20,7 @@ export default function Header() {
             </div>
             <div className="right-side-head">
                 {currentUser && (
-                    <>
+                    <div className="image-photo">
                         <Link
                         to="/"
                         >
@@ -31,15 +29,14 @@ export default function Header() {
                             alt=""
                             />
                         </Link>
-                    </>
+                    </div>
                 )}
-                {!currentUser & (
-                    <>
-                        <img
-                        src="../../assests/profileIcon.jpg"
+                {!currentUser && (
+                    <div className="image">
+                        <img src={require("../../assests/profileIcon.jpg")}
                         alt=""
                         />
-                    </>
+                    </div>
                 )}
             </div>
 

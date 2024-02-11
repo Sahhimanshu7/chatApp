@@ -1,6 +1,7 @@
 .header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background-color: #555555;
     padding: 5px 40px;
     margin: 10px 20px; 
@@ -16,4 +17,22 @@
 
 .logo a{
     text-decoration: none;
+}
+
+.right-side-head{
+    background-color: #555555;
+}
+
+.image img{
+    width: 30px;
+    height: 30px;
+    background-color: #555555;
+    /* border: 0.5px solid black; */
+    border-radius: 50%;
+}
+
+.image{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
 }
