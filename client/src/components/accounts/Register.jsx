@@ -48,11 +48,38 @@ export default function Register() {
             <div className="right-side-register">
 
                 <h1 className="form-header">
-                    Register your account.
+                    Register your account
                 </h1>
                 
                 <form onSubmit={handleFormSubmit}>
-
+                    <input
+                    placeholder="Email..."
+                    id="email"
+                    type="email"
+                    className="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                    placeholder="Password..."
+                    id="password"
+                    type="password"
+                    className="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <input
+                    placeholder="Confirm Password..."
+                    id="confirmPassword"
+                    type="password"
+                    className="confirmPassword"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <button 
+                    type="submit"
+                    disabled={loading}
+                    className="register-button"
+                    >
+                        Register
+                    </button>
                 </form>
 
                 <Link to= "/login">
