@@ -19,7 +19,7 @@ export default function Header() {
                 </Link>
             </div>
             <div className="right-side-head">
-                {currentUser && (
+                {currentUser.photoURL !== null && (
                     <div className="image-photo">
                         <Link
                         to="/"
@@ -31,7 +31,7 @@ export default function Header() {
                         </Link>
                     </div>
                 )}
-                {!currentUser && (
+                {(currentUser.photoURL == null || !currentUser) && (
                     <div className="image">
                         <img src={require("../../assests/profileIcon.jpg")}
                         alt=""
