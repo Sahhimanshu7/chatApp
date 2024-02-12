@@ -1,4 +1,3 @@
-import { LogoutIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -9,6 +8,7 @@ import "../../assests/header.css";
 export default function Header() {
     const { currentUser } = useAuth();
 
+    console.log(currentUser);
     return(
         <div className="header">
             <div className="logo">
