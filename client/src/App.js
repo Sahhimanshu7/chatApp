@@ -5,6 +5,7 @@ import  Register  from "./components/accounts/Register";
 import './App.css';
 import Header from './components/layouts/Header';
 import ErrorMessage from './components/layouts/ErrorMessage';
+import Login from './components/accounts/Login';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <ErrorMessage />
         <Routes>
           <Route exact path='/register' element = {<Register />} />
+          <Route exact path='/login' element = {<Login />} />
         </Routes>
       </Router>
     </AuthProvider>
