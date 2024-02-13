@@ -40,10 +40,23 @@
     background-color: #1B1A1A;
     border-radius: 20px;
     color: aliceblue;
+    outline: none;
+    padding: 10px;
 }
 
 .userLabel{
     align-self: center;
     color: aliceblue;
+    margin: 15px;
+}
 
+.photoSubmit{
+    width: 120px;
+    height: 35px;
+    border: none;
+    background-color: blue;
+    color: aliceblue;
+    border-radius: 20px;
+    align-self: center;
+    margin: 15px;
 }
