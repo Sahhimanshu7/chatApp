@@ -8,6 +8,7 @@ import ErrorMessage from './components/layouts/ErrorMessage';
 import Login from './components/accounts/Login';
 import Profile from './components/accounts/Profile';
 import WithPrivateRoute from './utils/WithPrivateRoute';
+import ChatLayout from './components/layouts/ChatLayout';
 
 function App() {
   return (
@@ -22,6 +23,12 @@ function App() {
           <WithPrivateRoute>
             <Profile />
           </WithPrivateRoute>
+          } />
+          <Route exact path='/' 
+          element = {
+            <WithPrivateRoute>
+              <ChatLayout />
+            </WithPrivateRoute>
           } />
         </Routes>
       </Router>
