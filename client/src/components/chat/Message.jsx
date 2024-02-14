@@ -1,4 +1,4 @@
-import { format } from "timeago-react";
+import  format  from "timeago-react";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
