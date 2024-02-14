@@ -2,7 +2,7 @@ import axios from "axios";
 import auth from "../config/firebase";
 import { io } from "socket.io-client";
 
-const baseURL = "http://localhost:3001/api";
+const baseURL = "http://localhost:8080/api";
 
 const getUserToken = async () => {
     const user = auth.currentUser;
@@ -13,7 +13,7 @@ const getUserToken = async () => {
 export const initiateSocketConnection = async () => {
     const token = await getUserToken();
 
-    const socket = io("http://localhost:3001", {
+    const socket = io("http://localhost:8080", {
         reconnectionDelayMax: 10000,
         auth: {
             token: token
@@ -38,7 +38,7 @@ const createHeader = async () => {
 
 export const getAllUsers = async() => {
     const header = await createHeader();
-
+    
     try {
         const res = await axios.get(`${baseURL}/user`, header);
         return res.data;
@@ -72,7 +72,6 @@ export const getUsers = async (users) => {
   
   export const getChatRooms = async (userId) => {
     const header = await createHeader();
-  
     try {
       const res = await axios.get(`${baseURL}/room/${userId}`, header);
       return res.data;

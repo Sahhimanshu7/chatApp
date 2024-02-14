@@ -50,11 +50,12 @@ export default function AllUsers({
         changeChat(res);
     };
 
+    console.log(chatRooms);
     return (
         <div className="all-user">
             <h2 className="all-user-head">Chats</h2>
             <li className="all-user-lists">
-                {chatRooms && chatRooms.map((chatRoom, index) => (
+                {chatRooms.map((chatRoom, index) => (
                     <div
                         key={index}
                         className={classNames(
@@ -78,7 +79,7 @@ export default function AllUsers({
                 Other Users 
             </h2>
             <li className="second-all-user-lists">
-                {nonContacts && nonContacts.map((nonContact, index) => (
+                {nonContacts.map((nonContact, index) => (
                     <div
                         key={index}
                         className="second-all-user-div"

@@ -55,7 +55,7 @@ io.on("connection", (socket) =>{
     global.chatSocket = socket;
 
     socket.on("addUser", (userId) =>{
-        onlineUser.set(userId, socket.id);
+        onlineUsers.set(userId, socket.id);
         socket.emit("getUsers", Array.from(onlineUsers));
     });
 
