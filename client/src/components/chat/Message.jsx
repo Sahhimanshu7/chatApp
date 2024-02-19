@@ -1,4 +1,5 @@
-import format from "timeago-react";
+import TimeAgo from "timeago-react";
+import "../../assests/message.css";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -18,6 +19,9 @@ export default function Message({ message, self }) {
         >
           <span className="text">{message.message}</span>
         </div>
+        <span className="time-ago">
+          <TimeAgo datetime={message.createdAt} />
+        </span>
       </li>
     </div>
   );

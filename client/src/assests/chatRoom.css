@@ -21,4 +21,5 @@
   height: 70vh;
   margin: 15px 0px;
   border-radius: 20px;
+  max-height: 800px;
 }
