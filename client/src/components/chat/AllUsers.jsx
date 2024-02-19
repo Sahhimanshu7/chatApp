@@ -42,10 +42,12 @@ export default function AllUsers({
   };
 
   const handleNewChatRoom = async (user) => {
+    console.log(user);
     const members = {
       senderId: currentUser.uid,
       receiverId: user.uid,
     };
+    console.log(members);
     const res = await createChatRoom(members);
     setChatRooms((prev) => [...prev, res]);
     changeChat(res);

@@ -84,7 +84,7 @@ export default function ChatRoom({ currentChat, currentUser, socket }) {
         </ul>
       </div>
 
-      <ChatForm handleFormSubmit={handleFormSubmit} className="chat-form" />
+      <ChatForm handleFormSubmit={handleFormSubmit} />
     </div>
   );
 }
