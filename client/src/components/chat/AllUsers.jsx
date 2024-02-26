@@ -20,6 +20,7 @@ export default function AllUsers({
   const [selectedChat, setSelectedChat] = useState();
   const [nonContacts, setNonContacts] = useState([]);
   const [contactIds, setContactIds] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const Ids = chatRooms.map((chatRoom) => {
@@ -42,7 +43,7 @@ export default function AllUsers({
   };
 
   const handleNewChatRoom = async (user) => {
-    console.log(user);
+    setLoading(true);
     const members = {
       senderId: currentUser.uid,
       receiverId: user.uid,
@@ -51,6 +52,7 @@ export default function AllUsers({
     const res = await createChatRoom(members);
     setChatRooms((prev) => [...prev, res]);
     changeChat(res);
+    setLoading(false);
   };
 
   console.log(chatRooms);
@@ -77,13 +79,15 @@ export default function AllUsers({
       <h2 className="all-users-second-head">Other Users</h2>
       <li className="second-all-user-lists">
         {nonContacts.map((nonContact, index) => (
-          <div
+          <button
+            disabled={loading}
             key={index}
             className="second-all-user-div"
-            onClick={() => handleNewChatRoom(nonContact)}
+            onClick={() => 
+              handleNewChatRoom(nonContact)}
           >
             <UserLayout user={nonContact} onlineUserId={onlineUsersId} />
-          </div>
+          </button>
         ))}
       </li>
     </div>
