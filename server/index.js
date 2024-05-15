@@ -13,7 +13,6 @@ import chatRoomRoutes from "./routes/chatRoom.js";
 
 const app = express();
 
-require("./bin/www");
 
 dotenv.config();
 
