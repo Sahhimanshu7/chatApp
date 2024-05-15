@@ -1,11 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
-
 import { useAuth } from "../context/AuthContext";
 
 const Auth = () => {
-  const { currentUser, setCurrentUser, loading, setLoading, error, setError } =
+  const { loading, setLoading, setError } =
     useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
