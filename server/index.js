@@ -41,7 +41,7 @@ const server = app.listen(PORT, () =>{
 
 const io = new Server(server, {
     cors: {
-        origin: "http://www.chatusa.online",
+        origin: "*",
         credentials: true,
     },
 });
