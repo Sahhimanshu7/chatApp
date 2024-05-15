@@ -70,7 +70,7 @@ const SearchAndViewChats = () => {
         `http://localhost:8080/api/room/${currentUser._id}/${user._id}`
       );
       if (chat) {
-        setCurrentChat(chat.data[0]._id);
+        setCurrentChat(chat.data[0]);
         return;
       }
     } catch (error) {
@@ -84,7 +84,7 @@ const SearchAndViewChats = () => {
         receiverId: user._id,
       })
       .then((response) => {
-        setCurrentChat(response.data._id);
+        setCurrentChat(response.data);
       })
       .catch((error) => console.log(error));
   };
