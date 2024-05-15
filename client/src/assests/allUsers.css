@@ -32,3 +32,8 @@
 .second-all-user-lists{
   list-style: none;
 }
+.second-all-user-div{
+  outline: none;
+  border: none;
+  padding: none;
+}

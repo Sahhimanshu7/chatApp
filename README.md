@@ -25,6 +25,8 @@ A MERN based web application that lets users to chat in an user friendly experie
 
 chatApp, a MERN application, developed with the purpose to be able to talk to my friends and realtives without any organization using that conversation to show up ad on my feed. I use chatApp personally and right now with my friends living in the same appartment buildings who are on the same wireless network. chatApp has a great potential if used publicly.
 
+chatApp uses **socket.io** to facitilate real-time chat. It also uses sessions to avoid login continuously. It also uses firebase for user authentication and management.
+
 ## 2. Getting Started
 
 ### Clone or download the repository.
@@ -91,6 +93,46 @@ $ npm install
 ```
 
 ## 5. Dependencies
+
+Following dependencies are used to support client and server sides of the application. Some of the dependencies might be outdated and not available at the time of your use.
+
+**Please check their avaibility before using them.**
+
+### Client Side :
+
+`client/package.json`
+
+```
+"@heroicons/react": "^1.0.6",
+"@testing-library/jest-dom": "^5.17.0",
+"@testing-library/react": "^13.4.0",
+"@testing-library/user-event": "^13.5.0",
+"axios": "^1.6.7",
+"emoji-picker-react": "^4.7.12",
+"firebase": "^10.8.0",
+"react": "^18.2.0",
+"react-dom": "^18.2.0",
+"react-router-dom": "^6.22.0",
+"react-scripts": "5.0.1",
+"socket.io-client": "^4.7.4",
+"timeago-react": "^3.0.6",
+"web-vitals": "^2.1.4"
+```
+
+### Server Side :
+
+`server/package.json`
+
+```
+"cors": "^2.8.5",
+"dotenv": "^16.4.1",
+"express": "^4.18.2",
+"firebase": "^10.8.0",
+"firebase-admin": "^12.0.0",
+"mongoose": "^8.1.1",
+"nodemon": "^3.0.3",
+"socket.io": "^4.7.4"
+```
 
 ## 6. Author
 
