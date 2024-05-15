@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 
-import { getMessagesOfChatRoom, sendMessage } from "../../services/ChatServices";
+import {
+  getMessagesOfChatRoom,
+  sendMessage,
+} from "../../services/ChatServices";
 
 import Message from "./Message";
 import Contact from "./Contact";
 import ChatForm from "./ChatForm";
+import "../../assests/chatRoom.css";
 
 export default function ChatRoom({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
@@ -42,7 +46,7 @@ export default function ChatRoom({ currentChat, currentUser, socket }) {
 
   const handleFormSubmit = async (message) => {
     const receiverId = currentChat.members.find(
-      (member) => member !== currentUser.uid
+      (member) => member !== currentUser.uid,
     );
 
     socket.current.emit("sendMessage", {
@@ -61,24 +65,26 @@ export default function ChatRoom({ currentChat, currentUser, socket }) {
   };
 
   return (
-    <div className="lg:col-span-2 lg:block">
-      <div className="w-full">
-        <div className="p-3 bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-          <Contact chatRoom={currentChat} currentUser={currentUser} />
-        </div>
-
-        <div className="relative w-full p-6 overflow-y-auto h-[30rem] bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-          <ul className="space-y-2">
-            {messages.map((message, index) => (
-              <div key={index} ref={scrollRef}>
-                <Message message={message} self={currentUser.uid} />
-              </div>
-            ))}
-          </ul>
-        </div>
-
-        <ChatForm handleFormSubmit={handleFormSubmit} />
+    <div className="chat-box">
+      <div className="chat-head">
+        <Contact
+          chatRoom={currentChat}
+          currentUser={currentUser}
+          className="contact"
+        />
       </div>
+
+      <div className="message-box">
+        <ul className="space-y-2">
+          {messages.map((message, index) => (
+            <div key={index} ref={scrollRef}>
+              <Message message={message} self={currentUser.uid} />
+            </div>
+          ))}
+        </ul>
+      </div>
+
+      <ChatForm handleFormSubmit={handleFormSubmit} className="chat-form" />
     </div>
   );
 }
