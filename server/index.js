@@ -25,7 +25,7 @@ app.use(cors({
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 
-app.use(VerifyToken);
+// app.use(VerifyToken);
 
 const PORT = process.env.PORT || 8080;
 
