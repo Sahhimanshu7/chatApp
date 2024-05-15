@@ -1,6 +1,7 @@
 import { initializeApp, cert } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import dotenv from "dotenv";
+dotenv.config();
 
 const serviceAccountKey = {
   "type": process.env.type,

@@ -1,5 +1,6 @@
 import auth from "../config/firebase-config.js";
 
+
 export const VerifyToken = async (req, res, next) => {
     const token = req.headers.authorization.split('Bearer ')[1];
 
