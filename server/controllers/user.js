@@ -1,30 +1,85 @@
-import auth from "../config/firebase-config.js";
+import User from "../models/UserModel.js";
+import bcryptjs from "bcryptjs";
 
-export const getAllUsers = async (req, res) => {
-  const maxResults = 5;
-  let users = [];
+export const signupUser = async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const email = req.body.email;
 
   try {
-    const userRecords = await auth.listUsers(maxResults);
+    const user = await User.findOne({ username: username });
 
-    userRecords.users.forEach((user) => {
-      const { uid, email, displayName, photoURL } = user;
-      users.push({ uid, email, displayName, photoURL });
+    if (user) {
+      return res.status(400).json({
+        message: "Sorry the username already exists. Choose another username.",
+      });
+    }
+
+    const salt = await bcryptjs.genSalt(10);
+    const hashedPassword = await bcryptjs.hash(password, salt);
+
+    const newUser = new User({
+      username: username,
+      password: hashedPassword,
+      email: email,
     });
-    res.status(200).json(users);
+
+    const userCurr = await newUser.save();
+    res
+      .status(200)
+      .json({ message: "Username created successfully. ", userCurr });
   } catch (error) {
-    console.log(error);
+    res.status(500).json("Couldn't create the user.");
+  }
+};
+
+export const loginUser = async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  try {
+    const user = await User.findOne({ username: username });
+
+    if (!user) {
+      return res.status(400).json({ message: "Username not found!" });
+    }
+
+    const validPassword = await bcryptjs.compare(password, user.password);
+
+    if (validPassword) {
+      return res.status(200).json({ message: "User authenticated!", user });
+    } else {
+      return res.staus(400).json({ message: "Password is incorrect!" });
+    }
+  } catch (error) {
+    return res.status(500).json("Couldn't login.");
   }
 };
 
 export const getUser = async (req, res) => {
+  const username = req.body.username;
+
   try {
-    const userRecords = await auth.getUser(req.params.userId);
+    const user = await User.findOne({ username: username });
 
-    const { uid, email, displayName, photoURL } = userRecords;
-
-    res.status(200).json({ uid, email, displayName, photoURL });
+    if (user) {
+      return res.status(200).json({ message: "User is found!", user });
+    } else {
+      return res.status(404).json({ message: "User not found!" });
+    }
   } catch (error) {
-    console.log(error);
+    return res
+      .status(500)
+      .json("Internal error occured while trying to find the user.");
   }
+};
+
+export const getAllUsers = async (req, res) => {
+  const { name } = req.query;
+
+  const users = await User.find({
+    username: { $regex: new RegExp(name, "i") },
+  });
+
+  res.json(users);
 };

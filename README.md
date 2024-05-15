@@ -13,17 +13,17 @@ A MERN based web application that lets users to chat in an user friendly experie
 
 3. [`Prerequisites`](#3-prerequisites)
 
-4. [`FrontEnd and BackEnd`](#5-frontend-and-backend)
+4. [`FrontEnd and BackEnd`](#4-frontend-and-backend)
 
-5. [`Dependencies`](#6-dependencies)
+5. [`Dependencies`](#5-dependencies)
 
-6. [`Author`](#7-author)
+6. [`Author`](#6-author)
 
 # Usage
 
 ## 1. Introduction
 
-chatApp, a MERN application, developed with the purpose to be able to talk to my friends and realtives without any organization using that conversation to show up ad on my feed. I use chatApp personally and right now with my friends living in the same appartment buildings who are on the same wireless network. chatApp has a great potential if used publicly.
+chatApp, a MERN application, developed with the purpose to be able to talk to my friends and realtives without any organization using that conversation to show up ad on my feed. chatApp has a great potential if used publicly.
 
 chatApp uses **socket.io** to facitilate real-time chat. It also uses sessions to avoid login continuously. It also uses firebase for user authentication and management.
 
@@ -64,7 +64,7 @@ server/
 
 > [`MongoDB`](https://www.mongodb.com/)
 
-> [`Node`](https://nodejs.org/en)
+> [`node`](https://nodejs.org/en)
 
 > [`npm`](https://www.npmjs.com/)
 
@@ -82,6 +82,13 @@ $ cd client
 $ npm install
 ```
 
+Before starting the project, you need to get a firebase config file from: https://firebase.google.com/docs/auth/web/start and paste it into the config folder in src with name "firebase.jsx".
+
+```
+// To start the application
+$ npm start
+```
+
 ### BackEnd
 
 In another new terminal, type the following commands.
@@ -90,6 +97,11 @@ In another new terminal, type the following commands.
 // Navigate into server and install node_modules
 $ cd server
 $ npm install
+```
+
+```
+// To start the backend server
+$ nodemon start
 ```
 
 ## 5. Dependencies
@@ -137,6 +149,8 @@ Following dependencies are used to support client and server sides of the applic
 ## 6. Author
 
 [`Himanshu Sah`](https://github.com/Sahhimanshu7)
+
+[`View my website`](https://www.sahhimanshu7.com)
 
 For feedback or to get in touch
 [`Email Me`](mailto:himanshusah41@gmail.com)
