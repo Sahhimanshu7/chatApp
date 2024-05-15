@@ -36,3 +36,22 @@
     height: 32px;
     border-radius: 50%;
 }
+
+@media only screen and (max-width: 1400px) {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #555555;
+        padding: 5px 40px;
+        margin: 5px 10px;
+        border-radius: 20px;
+        width: 90vw;
+    }
+    .logo span {
+        color: #FFFFFF;
+        font-size: 30px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background-color: #555555;
+    }
+}
