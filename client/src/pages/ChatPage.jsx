@@ -4,7 +4,6 @@ import { useAuth } from "../context/AuthContext";
 
 const ChatPage = () => {
   const { loading, setLoading } = useAuth();
-  setLoading(false);
   return (
     <div className="bg-gray-950 w-full h-full flex">
       <SearchAndViewChats />

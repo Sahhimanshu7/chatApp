@@ -37,6 +37,7 @@ const Auth = () => {
         setError("Login failed!");
         console.log(error);
       });
+    setLoading(false);
   };
 
   const handleSignUpSubmit = async (e) => {
@@ -62,6 +63,7 @@ const Auth = () => {
         console.log(error);
         setError("Signup failed!");
       });
+    setLoading(false);
   };
 
   return (

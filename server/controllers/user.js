@@ -57,10 +57,10 @@ export const loginUser = async (req, res) => {
 };
 
 export const getUser = async (req, res) => {
-  const username = req.body.username;
+  const id = req.body.id;
 
   try {
-    const user = await User.findOne({ username: username });
+    const user = await User.findOne({ _id: id });
 
     if (user) {
       return res.status(200).json({ message: "User is found!", user });

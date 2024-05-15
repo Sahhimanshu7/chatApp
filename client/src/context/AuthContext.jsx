@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(authData ? authData : null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
+  const [currentChat, setCurrentChat] = useState();
 
   const value = {
     currentUser,
@@ -20,6 +21,8 @@ export function AuthProvider({ children }) {
     setError,
     loading,
     setLoading,
+    currentChat,
+    setCurrentChat,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
