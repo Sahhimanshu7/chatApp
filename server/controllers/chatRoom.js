@@ -33,10 +33,12 @@ export const getChatRoomOfUsers = async (req, res) => {
     const chatRoom = await ChatRoom.find({
       members: { $all: [req.params.firstUserId, req.params.secondUserId] },
     });
+    if(chatRoom) {
     res.status(200).json(chatRoom);
+    } else {
+      res.status(404).json("Not found")
+    }
   } catch (error) {
-    res.status(404).json({
-      message: error.message,
-    });
+    res.status(500).json("Not found");
   }
 };

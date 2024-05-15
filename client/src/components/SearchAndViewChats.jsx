@@ -4,10 +4,10 @@ import axios from "axios";
 import { AccountCircle } from "@mui/icons-material";
 import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
-import _ from 'lodash';
+import _ from "lodash";
 
 const SearchAndViewChats = () => {
-  const { currentUser, setCurrentChat } = useAuth();
+  const { currentUser, currentChat, setCurrentChat } = useAuth();
 
   const [foundUsers, setFoundUsers] = useState();
   const [viewMessages, setViewMessages] = useState(true);
@@ -15,7 +15,8 @@ const SearchAndViewChats = () => {
 
   const [friends, setfriends] = useState([]);
 
-  let chatFriends = [];
+  // let chatFriends = [];
+  const [chatFriends, setChatFriends] = useState([]);
 
   useEffect(() => {
     const getChatRooms = async () => {
@@ -30,26 +31,25 @@ const SearchAndViewChats = () => {
   }, []);
   
   useEffect(() => {
-    chatrooms.map((chat) => {
+    chatrooms && chatrooms.map((chat) => {
       chat.members.forEach((ids) => {
         if (ids != currentUser._id) {
-          chatFriends.push(ids);
+          setChatFriends((f) => _.uniq([...f, ids]));
         }
       })
     })
-
     const getFriends = () => {
       chatFriends.map(async (ids) => {
         await axios.post("http://localhost:8080/api/user/get-user", {
           id: ids
         }).then((res) => {
-          let f = friends.filter((item) => item !== res.data.user)
-          setfriends((f) => (_.uniq([...f, res.data.user])));
+          setfriends((f) => [...f, res.data.user]);
         })
         .catch(err => console.log(err))
       })
     }
-    if(chatFriends.length > friends.length) getFriends();
+
+    getFriends();
   }, [chatrooms])
 
   const handleChange = async (value) => {
@@ -65,30 +65,32 @@ const SearchAndViewChats = () => {
     if (currentUser._id === user._id) return;
 
     // search to see if the conversation exists already before creating a new one.
-
-    const chat = await axios.get(
-      `http://localhost:8080/api/room/${currentUser._id}/:{user._id}`,
-    );
-    if (chat.data._id) {
-      setCurrentChat(chat.data._id);
-      return;
+    try {
+      const chat = await axios.get(
+        `http://localhost:8080/api/room/${currentUser._id}/${user._id}`
+      );
+      if (chat) {
+        setCurrentChat(chat.data[0]._id);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
     }
-    console.log(user)
+    
+    
     await axios
       .post("http://localhost:8080/api/room", {
         senderId: currentUser._id,
         receiverId: user._id,
       })
       .then((response) => {
-        // setChatRooms([...chatrooms, response.data._id]);
-        console.log(response)
         setCurrentChat(response.data._id);
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <div className="md:w-[30vw] h-[87vh] border-solid border-2 border-blue-950 p-4 m-4 rounded-2xl">
+    <div className="md:w-[30vw] h-[87vh] border-solid border-2 border-blue-950 p-4 m-4 rounded-2xl overflow-y-auto">
       <div className="flex justify-center items-center space-x-2">
         {!viewMessages && (
           <button onClick={() => setViewMessages(!viewMessages)}>
@@ -108,7 +110,7 @@ const SearchAndViewChats = () => {
       {viewMessages ?( 
       <div>
         {
-              friends.map((users, index) => (
+             friends.map((users, index) => (
                 <button
                   key={index}
                   className="flex flex-col justify-center w-full"

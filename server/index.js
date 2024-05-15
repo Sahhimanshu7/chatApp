@@ -16,12 +16,7 @@ const app = express();
 dotenv.config();
 
 app.use(
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  }),
+  cors(),
 );
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
