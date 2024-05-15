@@ -2,7 +2,7 @@ import axios from "axios";
 import auth from "../config/firebase";
 import { io } from "socket.io-client";
 
-const baseURL = "https://chat-app-backend-taupe.vercel.app//api";
+const baseURL = "https://chatapp-owjc.onrender.com/api";
 
 const getUserToken = async () => {
   const user = auth.currentUser;
@@ -13,7 +13,7 @@ const getUserToken = async () => {
 export const initiateSocketConnection = async () => {
   const token = await getUserToken();
 
-  const socket = io("https://chat-app-backend-taupe.vercel.app/", {
+  const socket = io("https://chatapp-owjc.onrender.com/", {
     reconnectionDelayMax: 10000,
     auth: {
       token: token,
