@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import axios from "axios";
 
 import Message from './Message';
+import SendIcon from '@mui/icons-material/Send';
 
 const ChatRoom = ({ socket }) => {
     const { currentUser, currentChat } = useAuth();
@@ -72,8 +73,12 @@ const ChatRoom = ({ socket }) => {
 
   return (
     <div>
+      {/* header of message box */}
+      <div className='md:h-[5vh] bg-gray-700 rounded-t-3xl'>
+
+      </div>
       {/* messages box */}
-      <div className="message-box">
+      <div className="w-full md:h-[72vh] overflow-y-auto mt-1">
         <ul className="space-y-2">
           {messages.map((message, index) => (
             <div key={index} ref={scrollRef}>
@@ -83,12 +88,12 @@ const ChatRoom = ({ socket }) => {
         </ul>
       </div>
       {/* chat form */}
-      <div ref={scrollRef}>
-        <form onSubmit={handleSubmit}>
+      <div className='relative top-[20px]'>
+        <form onSubmit={handleSubmit} className='space-x-3 w-full flex mx-2'>
           <input
           type="text"
           placeholder="Message ... "
-          className="message-input"
+          className="md:w-[60vw] md:h-[40px] rounded-3xl bg-black text-white outline-none md:py-2 md:px-4"
           name="message"
           required
           value={message}
@@ -96,7 +101,7 @@ const ChatRoom = ({ socket }) => {
         />
 
         <button type="submit" className="submit-message">
-          Submit
+          <SendIcon sx={{ color: "white", fontSize: 30}}/>
         </button>
         </form>
       </div>
