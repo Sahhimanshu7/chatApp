@@ -2,7 +2,7 @@ import axios from "axios";
 import auth from "../config/firebase";
 import { io } from "socket.io-client";
 
-const baseURL = "http://192.168.1.182:8080/api";
+const baseURL = "https://chat-app-backend-taupe.vercel.app//api";
 
 const getUserToken = async () => {
   const user = auth.currentUser;
@@ -13,7 +13,7 @@ const getUserToken = async () => {
 export const initiateSocketConnection = async () => {
   const token = await getUserToken();
 
-  const socket = io("http://localhost:8080", {
+  const socket = io("https://chat-app-backend-taupe.vercel.app/", {
     reconnectionDelayMax: 10000,
     auth: {
       token: token,
