@@ -10,6 +10,7 @@ import { useAuth } from "../../context/AuthContext";
 import ChatRoom from "../chat/ChatRoom";
 import AllUsers from "../chat/AllUsers";
 import SearchUsers from "../chat/SearchUsers";
+import "../../assests/chatLayout.css";
 
 export default function ChatLayout() {
   const [users, SetUsers] = useState([]);
@@ -92,7 +93,7 @@ export default function ChatLayout() {
       chatRooms.forEach((chatRoom) => {
         // Check if searched user is a contact or not.
         const isUserContact = chatRoom.members.some(
-          (e) => e !== currentUser.uid && searchedUsersId.includes(e)
+          (e) => e !== currentUser.uid && searchedUsersId.includes(e),
         );
         setIsContact(isUserContact);
 
@@ -106,9 +107,9 @@ export default function ChatLayout() {
   };
 
   return (
-    <div className="container mx-auto">
-      <div className="min-w-full bg-white border-x border-b border-gray-200 dark:bg-gray-900 dark:border-gray-700 rounded lg:grid lg:grid-cols-3">
-        <div className="bg-white border-r border-gray-200 dark:bg-gray-900 dark:border-gray-700 lg:col-span-1">
+    <div className="container-chatLayout">
+      <div className="chatLayout">
+        <div className="Main">
           <SearchUsers handleSearch={handleSearch} />
 
           <AllUsers
