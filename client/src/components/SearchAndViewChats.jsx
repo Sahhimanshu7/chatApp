@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import _ from "lodash";
 
 const SearchAndViewChats = () => {
-  const { currentUser, currentChat, setCurrentChat } = useAuth();
+  const { currentUser, currentChat, setCurrentChat, setCurrentFriend } = useAuth();
 
   const [foundUsers, setFoundUsers] = useState();
   const [viewMessages, setViewMessages] = useState(true);
@@ -71,6 +71,7 @@ const SearchAndViewChats = () => {
       );
       if (chat) {
         setCurrentChat(chat.data[0]);
+        setCurrentFriend(user);
         return;
       }
     } catch (error) {
@@ -85,6 +86,7 @@ const SearchAndViewChats = () => {
       })
       .then((response) => {
         setCurrentChat(response.data);
+        setCurrentFriend(user);
       })
       .catch((error) => console.log(error));
   };

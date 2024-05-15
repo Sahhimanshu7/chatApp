@@ -5,11 +5,14 @@ import axios from "axios";
 
 import Message from './Message';
 import SendIcon from '@mui/icons-material/Send';
+import VideoCall from './VideoCall';
+import { AccountCircle } from '@mui/icons-material';
+
 
 const ChatRoom = ({ socket }) => {
-    const { currentUser, currentChat } = useAuth();
+    const { currentUser, currentChat, currentFriend } = useAuth();
 
-    console.log(currentChat);
+    
 
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
@@ -25,7 +28,6 @@ const ChatRoom = ({ socket }) => {
     useEffect(() => {
       const fetchData = async () => {
         const res = await axios.get(`http://localhost:8080/api/message/${currentChat._id}`);
-        console.log(res.data);
         setMessages(res.data);
       };
 
@@ -70,12 +72,20 @@ const ChatRoom = ({ socket }) => {
       const res = await axios.post("http://localhost:8080/api/message", messageBody);
       setMessages([...messages, res.data]);
     }
-
+    
   return (
     <div>
       {/* header of message box */}
-      <div className='md:h-[5vh] bg-gray-700 rounded-t-3xl'>
-
+      <div className='md:h-[5vh] bg-gray-700 rounded-t-3xl flex w-full justify-between'>
+        <div className='flex justify-start items-center ml-2 p-2 space-x-4'>
+          {currentFriend.ProfileImage ? (
+            <img src={currentFriend.ProfileImage} alt='' />
+          ):(
+            <AccountCircle sx={{ color: "white", fontSize: 40 }} />
+          )}
+          <h3 className='text-white text-2xl'>{currentFriend.username}</h3>
+        </div>
+        <VideoCall />
       </div>
       {/* messages box */}
       <div className="w-full md:h-[72vh] overflow-y-auto mt-1">

@@ -71,6 +71,17 @@ io.on("connection", (socket) => {
     }
   });
 
+  // video call socket
+  socket.on("join-room", ({ chatId, userId }) => {
+    const sendUserSocket = onlineUsers.get(userId);
+    if(sendUserSocket) {
+      socket.to(sendUserSocket).emit("join-room", {
+        userId,
+        chatId
+      });
+    }
+  });
+
   socket.on("disconnect", () => {
     onlineUsers.delete(getKey(onlineUsers, socket.id));
     socket.emit("getUsers", Array.from(onlineUsers));
