@@ -1,6 +1,12 @@
 import { useState } from "react";
+import axios from "axios";
+import { Navigate } from "react-router-dom";
+
+import { useAuth } from "../context/AuthContext";
 
 const Auth = () => {
+  const { currentUser, setCurrentUser, loading, setLoading, error, setError } =
+    useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -11,12 +17,51 @@ const Auth = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    await axios
+      .post("http://localhost:8080/api/user/login", {
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response.data.user);
+        if (response.data.user) {
+          localStorage.setItem("chat-user", JSON.stringify(response.data.user));
+          window.location.href = "/";
+        }
+      })
+      .catch((error) => {
+        setError("Login failed!");
+        console.log(error);
+      });
   };
 
-  const handleSignUpSubmit = (e) => {
+  const handleSignUpSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
+    await axios
+      .post("http://localhost:8080/api/user/sign-up", {
+        username: username,
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        if (response.data.userCurr) {
+          localStorage.setItem(
+            "chat-user",
+            JSON.Stringfy(response.data.userCurr),
+          );
+          window.location.href = "/";
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        setError("Signup failed!");
+      });
   };
 
   return (
@@ -31,6 +76,7 @@ const Auth = () => {
           >
             <p className="text-white">Username</p>
             <input
+              id="username"
               className="text-white outline-none bg-black rounded-3xl px-4 py-2"
               placeholder="Username ..."
               onChange={(e) => setUsername(e.target.value)}
@@ -38,20 +84,25 @@ const Auth = () => {
             />
             <p className="text-white">Password</p>
             <input
+              id="password"
               className="text-white outline-none bg-black rounded-3xl px-4 py-2"
               placeholder="Password ..."
               type={passwordVisible ? "text" : "password"}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button
+
+            <p
               onClick={handlePasswordVisibility}
               className="text-white underline cursor-pointer"
             >
               {passwordVisible ? "Hide password" : "Show password"}
-            </button>
+            </p>
+
             <button
               type="submit"
+              name="submit"
               className="text-white bg-blue-950 rounded-3xl"
+              disabled={loading}
             >
               Login
             </button>
@@ -79,6 +130,7 @@ const Auth = () => {
           >
             <p className="text-white">Username</p>
             <input
+              id="username"
               name="username"
               className="text-white outline-none bg-black rounded-3xl px-4 py-2"
               placeholder="Username ..."
@@ -87,6 +139,7 @@ const Auth = () => {
             />
             <p className="text-white">Password</p>
             <input
+              id="password"
               className="text-white outline-none bg-black rounded-3xl px-4 py-2"
               placeholder="Password ..."
               type={passwordVisible ? "text" : "password"}
@@ -94,17 +147,18 @@ const Auth = () => {
             />
             <p className="text-white">Email</p>
             <input
+              id="email"
               className="text-white outline-none bg-black rounded-3xl px-4 py-2"
               placeholder="Email..."
               type="email"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button
+            <p
               onClick={handlePasswordVisibility}
               className="text-white underline cursor-pointer"
             >
               {passwordVisible ? "Hide password" : "Show password"}
-            </button>
+            </p>
             <button
               type="submit"
               className="text-white bg-blue-950 rounded-3xl"
@@ -118,6 +172,7 @@ const Auth = () => {
               <button
                 className="text-blue-900 underline cursor-pointer"
                 onClick={(e) => setLogin(!login)}
+                disabled={loading}
               >
                 Login
               </button>

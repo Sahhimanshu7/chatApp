@@ -6,9 +6,9 @@ const WithPrivateRoute = ({ children }) => {
 
   if (currentUser) {
     return children;
+  } else {
+    return <Navigate to="/auth" />;
   }
-
-  return <Navigate to="/auth" />;
 };
 
 export default WithPrivateRoute;

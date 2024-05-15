@@ -6,6 +6,7 @@ import WithPrivateRoute from "./utils/WithPrivateRoute";
 import ChatPage from "./pages/ChatPage";
 import ProfilePage from "./pages/ProfilePage";
 import ErrorDisplay from "./layouts/ErrorDisplay";
+import Loading from "./layouts/Loading";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Router>
         <Header />
         <ErrorDisplay />
+        <Loading />
         <Routes>
           <Route
             exact

@@ -6,16 +6,15 @@ const ErrorDisplay = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setError("");
-    }, 2000);
+      setError();
+    }, 500);
   }, []);
+
   return (
     <div>
-      {error === "" ? (
-        " "
-      ) : (
+      {error && (
         <div className="absolute top-5 right-3">
-          <div className="border-red bg-black">
+          <div className="border-red bg-black rounded-xl">
             <p className="md:text-xl text-white white p-4">{error}</p>
           </div>
         </div>
