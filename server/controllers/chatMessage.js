@@ -1,4 +1,4 @@
-import ChatMessage from "../models/chatMessage.js";
+import ChatMessage from "../models/ChatMessage.js";
 
 export const createMessage = async (req,res) => {
     const newMessage = new ChatMessage(req.body);
