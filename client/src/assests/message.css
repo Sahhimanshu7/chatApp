@@ -1,0 +1,28 @@
+.message {
+  list-style: none;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.receiver-text {
+  margin: 10px 0px;
+}
+.receiver-text span {
+  background-color: blue;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+}
+
+.sender-text {
+  margin: 10px 0px;
+  align-self: right;
+}
+.sender-text span {
+  background-color: #555555;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+}
