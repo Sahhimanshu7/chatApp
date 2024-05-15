@@ -15,7 +15,7 @@ const app = express();
 
 dotenv.config();
 
-app.use(cors());
+// app.use(cors({origin: "www.chatusa.online"}));
 app.use(express.json());
 app.use(urlencoded({ extended: true }));
 
