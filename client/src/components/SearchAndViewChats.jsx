@@ -15,7 +15,6 @@ const SearchAndViewChats = () => {
 
   const [friends, setfriends] = useState([]);
 
-  // let chatFriends = [];
   const [chatFriends, setChatFriends] = useState([]);
 
   useEffect(() => {

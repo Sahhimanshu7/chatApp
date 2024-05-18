@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { Peer } from "peerjs"
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 
-const VideoCall = () => {
+const VideoCall = ({ socket }) => {
     const [startVideoCall, setStartVideoCall] = useState(false);
     // const socket = io('/') // Create our socket
     // const videoGrid = document.getElementById('video-grid') // Find the Video-Grid element

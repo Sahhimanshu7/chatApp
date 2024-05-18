@@ -1,10 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+
+import { useAuth } from "../context/AuthContext"; //context
 
 const Auth = () => {
-  const { loading, setLoading, setError } =
-    useAuth();
+  const { loading, setLoading, setError } = useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");

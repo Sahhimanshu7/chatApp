@@ -11,9 +11,6 @@ import { AccountCircle } from '@mui/icons-material';
 
 const ChatRoom = ({ socket }) => {
     const { currentUser, currentChat, currentFriend } = useAuth();
-
-    
-
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
     const [incomingMessage, setIncomingMessage] = useState(null);
@@ -85,7 +82,9 @@ const ChatRoom = ({ socket }) => {
           )}
           <h3 className='text-white text-2xl'>{currentFriend.username}</h3>
         </div>
-        <VideoCall />
+        <VideoCall 
+          socket={ socket }
+        />
       </div>
       {/* messages box */}
       <div className="w-full md:h-[72vh] overflow-y-auto mt-1">
