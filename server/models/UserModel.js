@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema(
       max: 50,
       unique: true,
     },
-    profilePic: {
+    profileImage: {
       type: String,
     },
   },

@@ -2,6 +2,7 @@ import { useAuth } from "../context/AuthContext";
 import { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import ChatRoom from "./ChatRoom";
+import GetVideoCall from "./GetVideoCall";
 
 const initiateSocketConnection = async () => {
   const socket = io("http://localhost:8080",{
@@ -17,6 +18,8 @@ const ChatBox = () => {
   const socket = useRef();
   const [onlineUsersId, setonlineUsersId] = useState([]);
 
+  const [videoCallData, setVideoCallData] = useState();
+
    useEffect(() => {
     const getSocket = async () => {
       const res = await initiateSocketConnection();
@@ -30,6 +33,16 @@ const ChatBox = () => {
 
     getSocket();
   }, [currentUser._id]);
+
+  useEffect(() => {
+    const getVideoCall = () => {
+      socket.current?.on("getVideoCall", (data) => {
+        setVideoCallData(data);
+      })
+    }
+
+    getVideoCall();
+  })
 
   return (
     <div className="md:w-[70vw] m-4 border-blue-950 border-2 border-line rounded-3xl">
@@ -46,6 +59,11 @@ const ChatBox = () => {
           </p>
         </div>
       )}
+      {videoCallData && 
+      <div>
+        <GetVideoCall data={videoCallData} />
+      </div>
+      }
     </div>
   );
 };

@@ -90,6 +90,9 @@ const SearchAndViewChats = () => {
       .catch((error) => console.log(error));
   };
 
+  const lastMessage = (id) => {
+    return id;
+  } 
   return (
     <div className="md:w-[30vw] h-[87vh] border-solid border-2 border-blue-950 p-4 m-4 rounded-2xl overflow-y-auto">
       <div className="flex justify-center items-center space-x-2">
@@ -129,7 +132,7 @@ const SearchAndViewChats = () => {
                     </div>
                     <div>
                       <p className="text-white text-left">@{users.username}</p>
-                      <p className="text-white">{users.email}</p>
+                      <p className="text-white">{lastMessage(users._id)}</p>
                     </div>
                   </div>
                 </button>

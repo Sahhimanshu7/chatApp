@@ -83,3 +83,15 @@ export const getAllUsers = async (req, res) => {
 
   res.json(users);
 };
+
+export const uploadImage = async (req, res) => {
+  const { url } = req.body;
+
+  try {
+    
+  } catch (error) {
+    return res
+      .status(500)
+      .json("Internal server error occured while uploading the link for the profileImage.")
+  }
+}

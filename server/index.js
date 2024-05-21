@@ -33,7 +33,7 @@ app.use("/api/room", chatRoomRoutes); // Room routes
 app.use("/api/message", chatMessageRoutes); // Chat messages
 
 const server = app.listen(PORT, () => {
-  console.log(`Server is lintening on ${PORT}`);
+  console.log(`Server is listening on ${PORT}`);
 });
 
 const io = new Server(server, {
@@ -71,10 +71,18 @@ io.on("connection", (socket) => {
     }
   });
 
-  // //send video call
-  // socket.on("video-call", ({ chatId, senderId, receiverId }))
-  // // video call socket
-  // socket.on("join-room", ({ chatId, userId }) => {
+  //send video call
+  socket.on("video-call", ({ senderId, receiverId }) => {
+    const sendVideoCall = onlineUsers.get(receiverId);
+    if(sendVideoCall){
+      socket.to(sendVideoCall).emit("getVideoCall", {
+        senderId
+      });
+    }
+  });
+  
+  // video call socket
+  // socket.on("join-", ({ userId }) => {
   //   const sendUserSocket = onlineUsers.get(userId);
   //   if(sendUserSocket) {
   //     socket.to(sendUserSocket).emit("join-room", {
